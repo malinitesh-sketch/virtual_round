@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Activity Search</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <a href="itinerary-builder.html" style="color: var(--text-primary);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </a>
+            <h1>Activities in Paris</h1>
+            <div style="width: 24px;"></div>
+        </div>
+        
+        <div class="content-area">
+            <div class="form-group" style="margin-bottom: 16px;">
+                <input type="text" placeholder="Search experiences, food, tours...">
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-bottom: 24px;">
+                <select class="form-group" style="width: 48%; padding: 8px; border-radius: 6px; border: 1px solid var(--input-border); background: var(--input-bg); color: white;">
+                    <option>Type: All</option>
+                    <option>Sightseeing</option>
+                    <option>Food & Drink</option>
+                </select>
+                <select class="form-group" style="width: 48%; padding: 8px; border-radius: 6px; border: 1px solid var(--input-border); background: var(--input-bg); color: white;">
+                    <option>Cost: Any</option>
+                    <option>Free</option>
+                    <option>$$$</option>
+                </select>
+            </div>
+            
+            <div class="card" style="padding: 16px; margin-bottom: 16px; display: flex; gap: 16px;">
+                <div style="width: 80px; height: 80px; background: var(--color-2); border-radius: 8px;"></div>
+                <div style="flex: 1;">
+                    <h4 style="font-size: 15px; margin-bottom: 4px;">Louvre Museum Tour</h4>
+                    <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">Culture • 3 Hours • $45</p>
+                    <button class="btn" style="padding: 6px; font-size: 12px;">Add</button>
+                </div>
+            </div>
+
+            <div class="card" style="padding: 16px; margin-bottom: 16px; display: flex; gap: 16px;">
+                <div style="width: 80px; height: 80px; background: var(--color-3); border-radius: 8px;"></div>
+                <div style="flex: 1;">
+                    <h4 style="font-size: 15px; margin-bottom: 4px;">Seine River Cruise</h4>
+                    <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">Sightseeing • 1 Hour • $20</p>
+                    <button class="btn btn-secondary" style="padding: 6px; font-size: 12px;">Add</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

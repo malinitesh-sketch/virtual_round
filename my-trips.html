@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>My Trips</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <h1>My Trips</h1>
+            <a href="create-trip.html" style="color: var(--text-primary);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </a>
+        </div>
+        
+        <div class="content-area">
+            <div class="card" style="padding: 16px; margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                    <h4 style="font-size: 16px;">Euro Trip 2026</h4>
+                    <span style="font-size: 10px; background: var(--color-2); padding: 2px 6px; border-radius: 4px;">Upcoming</span>
+                </div>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">May 15 - May 25, 2026 (10 Days)</p>
+                <p style="font-size: 12px; margin-bottom: 16px;">3 Destinations: Paris, Rome, Berlin</p>
+                <div style="display: flex; gap: 8px;">
+                    <a href="itinerary-view.html" class="btn" style="padding: 8px; font-size: 13px; flex: 1;">View</a>
+                    <a href="itinerary-builder.html" class="btn btn-secondary" style="padding: 8px; font-size: 13px; flex: 1;">Edit</a>
+                </div>
+            </div>
+            
+            <div class="card" style="padding: 16px; margin-bottom: 16px; opacity: 0.7;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                    <h4 style="font-size: 16px;">Weekend in NY</h4>
+                    <span style="font-size: 10px; background: var(--input-border); padding: 2px 6px; border-radius: 4px;">Past</span>
+                </div>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Jan 10 - Jan 12, 2026 (2 Days)</p>
+                <p style="font-size: 12px; margin-bottom: 16px;">1 Destination: New York City</p>
+                <div style="display: flex; gap: 8px;">
+                    <a href="itinerary-view.html" class="btn btn-secondary" style="padding: 8px; font-size: 13px; flex: 1;">View</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="home.html" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                Home
+            </a>
+            <a href="my-trips.html" class="nav-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                My Trips
+            </a>
+            <a href="city-search.html" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                Discover
+            </a>
+            <a href="profile.html" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                Profile
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Create Trip</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <a href="home.html" style="color: var(--text-primary);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </a>
+            <h1>Create New Trip</h1>
+            <div style="width: 24px;"></div>
+        </div>
+        
+        <div class="content-area">
+            <div class="card">
+                <form action="itinerary-builder.html" method="GET">
+                    <div class="form-group">
+                        <label>Trip Name</label>
+                        <input type="text" placeholder="e.g. Summer in Europe" required>
+                    </div>
+                    
+                    <div class="grid-2col">
+                        <div class="form-group">
+                            <label>Start Date</label>
+                            <input type="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>End Date</label>
+                            <input type="date" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Trip Description</label>
+                        <textarea placeholder="What is this trip about?" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Cover Photo (Optional)</label>
+                        <div style="border: 2px dashed var(--input-border); border-radius: 10px; padding: 30px; text-align: center; color: var(--text-secondary);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: 8px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                            <br>Tap to upload
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn" style="margin-top: 10px;">Save & Build Itinerary</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Traveloop Settings</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .setting-item:last-child { border-bottom: none; }
+        .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--input-bg); border: 1px solid var(--input-border); transition: .4s; border-radius: 24px; }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 2px; bottom: 2px; background-color: var(--text-secondary); transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--color-3); border-color: var(--color-3); }
+        input:checked + .slider:before { transform: translateX(20px); background-color: white; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <a href="profile.html" style="color: var(--text-primary);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </a>
+            <h1>Settings</h1>
+            <div style="width: 24px;"></div>
+        </div>
+        
+        <div class="content-area">
+            <div class="card">
+                <h3 style="margin-bottom: 16px; font-size: 16px; color: var(--color-4);">Preferences</h3>
+                <div class="setting-item">
+                    <span>Language</span>
+                    <span style="color: var(--text-secondary); font-size: 14px;">English (US)</span>
+                </div>
+                <div class="setting-item">
+                    <span>Currency</span>
+                    <span style="color: var(--text-secondary); font-size: 14px;">USD ($)</span>
+                </div>
+                <div class="setting-item">
+                    <span>Public Profile</span>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3 style="margin-bottom: 16px; font-size: 16px; color: var(--color-4);">Account</h3>
+                <div class="setting-item">
+                    <span>Edit Profile Details</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+                <div class="setting-item">
+                    <span>Change Password</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+                <div class="setting-item">
+                    <a href="index.html" style="color: #ef4444; text-decoration: none;">Sign Out</a>
+                </div>
+                <div class="setting-item" style="margin-top: 16px;">
+                    <a href="#" style="color: var(--text-secondary); text-decoration: none; font-size: 12px;">Delete Account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
