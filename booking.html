@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traveloop - Booking & Review</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Main navigation">
+      <div class="sidebar__inner">
+        <div class="brand">
+          <div class="brand__logo">T</div>
+          <div class="brand__name">Traveloop</div>
+        </div>
+
+        <nav class="nav">
+          <a class="nav__link" href="home.html"><span class="nav__icon">🏠</span><span class="nav__label">Home</span></a>
+          <a class="nav__link" href="planner.html"><span class="nav__icon">🗺️</span><span class="nav__label">Trip Planner</span></a>
+          <a class="nav__link" href="profile.html"><span class="nav__icon">👤</span><span class="nav__label">Profile</span></a>
+          <a class="nav__link" href="analytics.html"><span class="nav__icon">📊</span><span class="nav__label">Analytics</span></a>
+          <a class="nav__link" href="booking.html"><span class="nav__icon">✅</span><span class="nav__label">Booking</span></a>
+          <a class="nav__link" href="index.html"><span class="nav__icon">🔐</span><span class="nav__label">Login</span></a>
+        </nav>
+
+        <div class="sidebar__footer">
+          <div class="pill">
+            <div>
+              <div class="pill__title">Review</div>
+              <div class="pill__meta">selected services</div>
+            </div>
+            <span class="badge">🧾</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar__brand"> <span style="display:inline-block;width:36px;height:36px;border-radius:14px;background:linear-gradient(135deg,var(--first-color),var(--second-color));color:#fff;display:grid;place-items:center;font-weight:900;">T</span> Traveloop</div>
+        <div class="topbar__nav">
+          <a href="planner.html">Planner</a>
+          <a href="analytics.html">Analytics</a>
+          <a href="profile.html">Profile</a>
+        </div>
+      </header>
+
+      <div class="container">
+        <h1 class="page-title">Booking / Review</h1>
+        <p class="subtle" style="margin-top:0">List-view of selected services with a clear confirm action.</p>
+
+        <section class="card card-pad" style="margin-top:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:14px; flex-wrap:wrap">
+            <div>
+              <div style="font-weight:980; font-size:16px">Selected Services</div>
+              <div class="subtle" style="margin-top:6px; font-size:13px">Placeholder rows for flights/hotel/activities.</div>
+            </div>
+            <a class="btn btn--ghost" href="planner.html" style="padding:10px 14px">Back to Planner</a>
+          </div>
+
+          <div class="hr"></div>
+
+          <div class="list" aria-label="Selected services list">
+            <div class="service-row card" style="box-shadow:none; background:rgba(255,255,255,.7); border:1px solid rgba(15,23,42,.10); border-radius:20px;">
+              <div>
+                <b>✈️ Flights</b>
+                <div><small class="subtle">Jun 10 • Round-trip</small></div>
+              </div>
+              <div>
+                <small class="subtle">Travel</small>
+                <div style="font-weight:900; margin-top:4px">LIS ⇄ PRG</div>
+              </div>
+              <div class="hide-sm">
+                <small class="subtle">Price</small>
+                <div style="font-weight:900; margin-top:4px">€260</div>
+              </div>
+              <div style="display:flex; gap:10px; justify-content:flex-end;">
+                <a class="btn btn--ghost" href="#" onclick="return false;" style="padding:10px 12px">Remove</a>
+              </div>
+            </div>
+
+            <div class="service-row card" style="box-shadow:none; background:rgba(255,255,255,.7); border:1px solid rgba(15,23,42,.10); border-radius:20px;">
+              <div>
+                <b>🏨 Hotel</b>
+                <div><small class="subtle">Jun 10 - Jun 13 • 3 nights</small></div>
+              </div>
+              <div>
+                <small class="subtle">Room</small>
+                <div style="font-weight:900; margin-top:4px">Double Deluxe</div>
+              </div>
+              <div class="hide-sm">
+                <small class="subtle">Price</small>
+                <div style="font-weight:900; margin-top:4px">€420</div>
+              </div>
+              <div style="display:flex; gap:10px; justify-content:flex-end;">
+                <a class="btn btn--ghost" href="#" onclick="return false;" style="padding:10px 12px">Remove</a>
+              </div>
+            </div>
+
+            <div class="service-row card" style="box-shadow:none; background:rgba(255,255,255,.7); border:1px solid rgba(15,23,42,.10); border-radius:20px;">
+              <div>
+                <b>🧭 Activities</b>
+                <div><small class="subtle">City walk + museum + food tour</small></div>
+              </div>
+              <div>
+                <small class="subtle">Days</small>
+                <div style="font-weight:900; margin-top:4px">2 scheduled</div>
+              </div>
+              <div class="hide-sm">
+                <small class="subtle">Price</small>
+                <div style="font-weight:900; margin-top:4px">€330</div>
+              </div>
+              <div style="display:flex; gap:10px; justify-content:flex-end;">
+                <a class="btn btn--ghost" href="#" onclick="return false;" style="padding:10px 12px">Remove</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card total-row" style="margin-top:14px; border-radius:20px; background:rgba(255,255,255,.75); border:1px solid rgba(15,23,42,.10);">
+            <div>
+              <div class="subtle" style="font-weight:800">Total</div>
+              <div class="total">€1,010</div>
+              <div class="subtle" style="font-size:13px; margin-top:4px">Includes estimated taxes and activity fees.</div>
+            </div>
+            <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end; align-items:center;">
+              <a class="btn btn--ghost" href="analytics.html" style="padding:10px 14px">View Budget</a>
+              <a class="btn btn--accent" href="home.html" style="padding:12px 18px">Confirm ✓</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
+

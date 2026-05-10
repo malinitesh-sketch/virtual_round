@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveloop — Trip Notes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+    <aside class="sidebar">
+        <div class="sidebar-logo"><h1><i class="fa-solid fa-paper-plane"></i> Traveloop</h1><span>Travel Beyond Gravity</span></div>
+        <nav class="sidebar-nav">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="trip-listing.html"><i class="fa-solid fa-suitcase"></i> My Trips</a>
+            <a href="create-trip.html"><i class="fa-solid fa-plus-circle"></i> Plan a Trip</a>
+            <a href="activity-search.html"><i class="fa-solid fa-compass"></i> Explore</a>
+            <a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="community.html"><i class="fa-solid fa-users"></i> Community</a>
+            <a href="packing-checklist.html"><i class="fa-solid fa-clipboard-check"></i> Packing</a>
+            <a href="trip-notes.html" class="active"><i class="fa-solid fa-book"></i> Notes</a>
+            <a href="invoice.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoice</a>
+            <a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a>
+        </nav>
+        <div class="sidebar-footer"><div class="avatar">JA</div><div class="user-info"><strong>James A.</strong><span>Traveler</span></div></div>
+    </aside>
+
+    <main class="main-content">
+        <div class="topbar"><h2><i class="fa-solid fa-book"></i> Trip Notes</h2></div>
+
+        <!-- Trip Info -->
+        <div class="glass-card" style="margin-bottom:1.5rem;" id="notes-trip-info">
+            <h3>Trip: Paris & Rome Adventure</h3>
+            <p style="color:var(--text-muted);font-size:.9rem;">Jun 10 – Jun 20, 2025 · 4 cities</p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="tabs" id="notes-tabs">
+            <button class="tab-btn active" id="tab-all">All</button>
+            <button class="tab-btn" id="tab-day">By Day</button>
+            <button class="tab-btn" id="tab-stop">By Stop</button>
+        </div>
+
+        <!-- Notes List -->
+        <div style="display:flex;flex-direction:column;gap:1.2rem;max-width:800px;" id="notes-list">
+            <div class="glass-card fade-in" id="note-1">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.8rem;">
+                    <div>
+                        <h4 style="font-size:.95rem;"><i class="fa-solid fa-hotel" style="color:var(--neon-cyan);margin-right:6px;"></i> Hotel check-in details — Paris</h4>
+                        <span style="font-size:.75rem;color:var(--text-muted);">Day 1 · Jun 10, 2025</span>
+                    </div>
+                    <span class="badge badge-cyan">Hotel</span>
+                </div>
+                <p style="font-size:.88rem;color:var(--text-muted);line-height:1.7;">Check in after 2 PM, Room 415, breakfast included (7–10 AM). Free WiFi password: ParisStay2025. Concierge recommended: Le Petit Cler restaurant nearby.</p>
+            </div>
+
+            <div class="glass-card fade-in" style="animation-delay:.1s;" id="note-2">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.8rem;">
+                    <div>
+                        <h4 style="font-size:.95rem;"><i class="fa-solid fa-camera" style="color:var(--neon-violet);margin-right:6px;"></i> Best photo spots — Eiffel Tower</h4>
+                        <span style="font-size:.75rem;color:var(--text-muted);">Day 2 · Jun 11, 2025</span>
+                    </div>
+                    <span class="badge badge-violet">Sightseeing</span>
+                </div>
+                <p style="font-size:.88rem;color:var(--text-muted);line-height:1.7;">Trocadéro Gardens has the best view. Go early morning for fewer crowds. Evening light show starts at sundown — amazing for photos!</p>
+            </div>
+
+            <div class="glass-card fade-in" style="animation-delay:.2s;" id="note-3">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.8rem;">
+                    <div>
+                        <h4 style="font-size:.95rem;"><i class="fa-solid fa-hotel" style="color:var(--clr-cta);margin-right:6px;"></i> Hotel check-in details — Rome</h4>
+                        <span style="font-size:.75rem;color:var(--text-muted);">Day 3 · Jun 14, 2025</span>
+                    </div>
+                    <span class="badge badge-orange">Hotel</span>
+                </div>
+                <p style="font-size:.88rem;color:var(--text-muted);line-height:1.7;">Check in after 2 PM, Room 302, breakfast included (7–10 AM). Near Termini station. Ask front desk about Colosseum skip-the-line tickets.</p>
+            </div>
+        </div>
+
+        <!-- Add Note Button -->
+        <div style="margin-top:1.5rem;">
+            <button class="btn btn-primary" id="notes-add-btn"><i class="fa-solid fa-plus"></i> Add Note</button>
+        </div>
+    </main>
+</body>
+</html>

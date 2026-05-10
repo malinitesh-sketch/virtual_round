@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveloop — Community</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+    <aside class="sidebar">
+        <div class="sidebar-logo"><h1><i class="fa-solid fa-paper-plane"></i> Traveloop</h1><span>Travel Beyond Gravity</span></div>
+        <nav class="sidebar-nav">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="trip-listing.html"><i class="fa-solid fa-suitcase"></i> My Trips</a>
+            <a href="create-trip.html"><i class="fa-solid fa-plus-circle"></i> Plan a Trip</a>
+            <a href="activity-search.html"><i class="fa-solid fa-compass"></i> Explore</a>
+            <a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="community.html" class="active"><i class="fa-solid fa-users"></i> Community</a>
+            <a href="packing-checklist.html"><i class="fa-solid fa-clipboard-check"></i> Packing</a>
+            <a href="trip-notes.html"><i class="fa-solid fa-book"></i> Notes</a>
+            <a href="invoice.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoice</a>
+            <a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a>
+        </nav>
+        <div class="sidebar-footer"><div class="avatar">JA</div><div class="user-info"><strong>James A.</strong><span>Traveler</span></div></div>
+    </aside>
+
+    <main class="main-content">
+        <div class="topbar"><h2><i class="fa-solid fa-users"></i> Community</h2></div>
+
+        <p style="color:var(--text-muted);margin-bottom:1.5rem;max-width:700px;">Share your experiences, discover travel tips, and connect with fellow travelers from around the world.</p>
+
+        <!-- Search + Filters -->
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center;">
+            <div class="search-bar" style="max-width:400px;">
+                <i class="fa-solid fa-magnifying-glass" style="color:var(--text-muted);"></i>
+                <input type="text" placeholder="Search community posts..." id="community-search">
+                <button type="button"><i class="fa-solid fa-search"></i></button>
+            </div>
+            <select class="form-control" style="width:auto;max-width:140px;"><option>Group by</option><option>Topic</option><option>Location</option></select>
+            <select class="form-control" style="width:auto;max-width:140px;"><option>Filter</option><option>Tips</option><option>Reviews</option><option>Questions</option></select>
+            <select class="form-control" style="width:auto;max-width:140px;"><option>Sort by...</option><option>Newest</option><option>Most Liked</option></select>
+        </div>
+
+        <!-- Community Posts -->
+        <div style="display:flex;flex-direction:column;gap:1.5rem;max-width:800px;" id="community-feed">
+            <!-- Post 1 -->
+            <div class="glass-card post-card fade-in" id="post-1">
+                <div class="post-header">
+                    <div class="post-avatar">SA</div>
+                    <div><strong>Sarah Adams</strong><div class="post-meta">2 hours ago · <span class="badge badge-cyan" style="font-size:.7rem;">Travel Tip</span></div></div>
+                </div>
+                <p style="font-size:.9rem;line-height:1.7;">Just got back from Bali! 🌴 Pro tip: Visit Tegallalang Rice Terraces early morning (before 8 AM) to avoid crowds. The sunrise view is absolutely magical. Also, book your Uluwatu Temple tour separately — it's way cheaper than resort packages!</p>
+                <div class="post-actions">
+                    <button><i class="fa-solid fa-heart"></i> 42</button>
+                    <button><i class="fa-solid fa-comment"></i> 8</button>
+                    <button><i class="fa-solid fa-share"></i> Share</button>
+                    <button><i class="fa-solid fa-bookmark"></i> Save</button>
+                </div>
+            </div>
+
+            <!-- Post 2 -->
+            <div class="glass-card post-card fade-in" style="animation-delay:.15s;" id="post-2">
+                <div class="post-header">
+                    <div class="post-avatar" style="background:linear-gradient(135deg,var(--clr-cta),#fb923c);">MK</div>
+                    <div><strong>Mike Kumar</strong><div class="post-meta">5 hours ago · <span class="badge badge-orange" style="font-size:.7rem;">Review</span></div></div>
+                </div>
+                <p style="font-size:.9rem;line-height:1.7;">Tokyo food tour was incredible! 🍣 Tsukiji Outer Market is a must-visit. The ramen at Ichiran (Shibuya branch) was the best I've ever had. Budget around ¥5000/day for amazing food experiences. Don't miss the yakitori alley in Yurakucho!</p>
+                <div class="post-actions">
+                    <button><i class="fa-solid fa-heart"></i> 89</button>
+                    <button><i class="fa-solid fa-comment"></i> 15</button>
+                    <button><i class="fa-solid fa-share"></i> Share</button>
+                    <button><i class="fa-solid fa-bookmark"></i> Save</button>
+                </div>
+            </div>
+
+            <!-- Post 3 -->
+            <div class="glass-card post-card fade-in" style="animation-delay:.3s;" id="post-3">
+                <div class="post-header">
+                    <div class="post-avatar" style="background:linear-gradient(135deg,#22c55e,var(--neon-cyan));">LP</div>
+                    <div><strong>Laura Peterson</strong><div class="post-meta">1 day ago · <span class="badge badge-violet" style="font-size:.7rem;">Question</span></div></div>
+                </div>
+                <p style="font-size:.9rem;line-height:1.7;">Planning a 2-week Europe trip this summer! Has anyone done Paris → Rome → Swiss Alps? Looking for recommendations on train vs. flight between cities. Also, is the Eurail pass worth it? Any budget-friendly accommodation tips? 🏔️</p>
+                <div class="post-actions">
+                    <button><i class="fa-solid fa-heart"></i> 23</button>
+                    <button><i class="fa-solid fa-comment"></i> 31</button>
+                    <button><i class="fa-solid fa-share"></i> Share</button>
+                    <button><i class="fa-solid fa-bookmark"></i> Save</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

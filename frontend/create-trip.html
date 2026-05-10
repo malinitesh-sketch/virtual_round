@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveloop — Create Trip</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo"><h1><i class="fa-solid fa-paper-plane"></i> Traveloop</h1><span>Travel Beyond Gravity</span></div>
+        <nav class="sidebar-nav">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="trip-listing.html"><i class="fa-solid fa-suitcase"></i> My Trips</a>
+            <a href="create-trip.html" class="active"><i class="fa-solid fa-plus-circle"></i> Plan a Trip</a>
+            <a href="activity-search.html"><i class="fa-solid fa-compass"></i> Explore</a>
+            <a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="community.html"><i class="fa-solid fa-users"></i> Community</a>
+            <a href="packing-checklist.html"><i class="fa-solid fa-clipboard-check"></i> Packing</a>
+            <a href="trip-notes.html"><i class="fa-solid fa-book"></i> Notes</a>
+            <a href="invoice.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoice</a>
+            <a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a>
+        </nav>
+        <div class="sidebar-footer"><div class="avatar">JA</div><div class="user-info"><strong>James A.</strong><span>Traveler</span></div></div>
+    </aside>
+
+    <main class="main-content">
+        <div class="topbar">
+            <h2><i class="fa-solid fa-plus-circle"></i> Plan a New Trip</h2>
+            <a href="index.html" class="btn btn-ghost btn-sm"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        </div>
+
+        <!-- Step Indicator -->
+        <div class="glass-card" style="display:flex;justify-content:center;gap:2rem;margin-bottom:2rem;flex-wrap:wrap;" id="trip-steps">
+            <div style="text-align:center;">
+                <div style="width:40px;height:40px;border-radius:50%;background:var(--neon-cyan);display:flex;align-items:center;justify-content:center;margin:0 auto 6px;font-weight:700;color:var(--bg-dark);">1</div>
+                <span style="font-size:.75rem;color:var(--neon-cyan);">Destination</span>
+            </div>
+            <div style="width:60px;height:2px;background:var(--border-glow);align-self:center;margin-top:-20px;"></div>
+            <div style="text-align:center;">
+                <div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 6px;font-weight:700;color:var(--text-muted);">2</div>
+                <span style="font-size:.75rem;color:var(--text-muted);">Dates</span>
+            </div>
+            <div style="width:60px;height:2px;background:var(--border-glow);align-self:center;margin-top:-20px;"></div>
+            <div style="text-align:center;">
+                <div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 6px;font-weight:700;color:var(--text-muted);">3</div>
+                <span style="font-size:.75rem;color:var(--text-muted);">Activities</span>
+            </div>
+        </div>
+
+        <!-- Trip Form -->
+        <div class="glass-card fade-in" id="trip-form-card">
+            <h3 style="margin-bottom:1.5rem;"><i class="fa-solid fa-location-dot" style="color:var(--neon-cyan);"></i> Trip Details</h3>
+            <form id="create-trip-form">
+                <div class="form-group">
+                    <label for="trip-place"><i class="fa-solid fa-map-pin"></i> Select a Place</label>
+                    <input type="text" id="trip-place" class="form-control" placeholder="e.g. Paris, Tokyo, Bali...">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="trip-start"><i class="fa-solid fa-calendar"></i> Start Date</label>
+                        <input type="date" id="trip-start" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="trip-end"><i class="fa-solid fa-calendar-check"></i> End Date</label>
+                        <input type="date" id="trip-end" class="form-control">
+                    </div>
+                </div>
+
+                <h4 style="margin:1.5rem 0 1rem;font-size:.95rem;color:var(--neon-violet);"><i class="fa-solid fa-lightbulb"></i> Suggestions for Places to Visit / Activities</h4>
+                <div class="grid-3" style="margin-bottom:1.5rem;" id="trip-suggestions">
+                    <div class="glass-card" style="text-align:center;padding:1rem;cursor:pointer;">
+                        <i class="fa-solid fa-monument" style="font-size:1.5rem;color:var(--neon-cyan);margin-bottom:8px;display:block;"></i>
+                        <span style="font-size:.85rem;">Eiffel Tower</span>
+                    </div>
+                    <div class="glass-card" style="text-align:center;padding:1rem;cursor:pointer;">
+                        <i class="fa-solid fa-palette" style="font-size:1.5rem;color:var(--neon-violet);margin-bottom:8px;display:block;"></i>
+                        <span style="font-size:.85rem;">Louvre Museum</span>
+                    </div>
+                    <div class="glass-card" style="text-align:center;padding:1rem;cursor:pointer;">
+                        <i class="fa-solid fa-utensils" style="font-size:1.5rem;color:var(--clr-cta);margin-bottom:8px;display:block;"></i>
+                        <span style="font-size:.85rem;">French Cuisine Tour</span>
+                    </div>
+                </div>
+
+                <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+                    <button type="button" class="btn btn-outline" id="trip-add-section"><i class="fa-solid fa-plus"></i> Add Another Section</button>
+                    <a href="build-itinerary.html" class="btn btn-primary" id="trip-continue"><i class="fa-solid fa-arrow-right"></i> Continue to Itinerary</a>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

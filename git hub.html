@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <title>Git & VS Code Guide for Team</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; background-color: #f4f4f4; }
+        .container { max-width: 800px; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin: auto; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; }
+        h2 { color: #e67e22; margin-top: 25px; }
+        code { background: #272822; color: #f8f8f2; padding: 2px 5px; border-radius: 4px; font-family: monospace; }
+        .command-box { background: #2d2d2d; color: #61dafb; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 10px 0; position: relative; }
+        .step { margin-bottom: 15px; padding-left: 10px; border-left: 4px solid #3498db; }
+        .note { background: #fff3cd; padding: 10px; border-radius: 5px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚀 Git & VS Code Quick Guide</h1>
+    <p>Odoo Hackathon ma code manage karva mate niche na steps follow karo.</p>
+
+    <h2>1. VS Code Connection (Setup)</h2>
+    <div class="step">
+        <p>VS Code ma Terminal kholo (<code>Ctrl + `</code>) ane aa command nakho:</p>
+        <div class="command-box">
+            git config --global user.name "Tamaru Naam"<br>
+            git config --global user.email "tamaru@email.com"
+        </div>
+    </div>
+
+    <h2>2. Repository Clone Karvi</h2>
+    <div class="step">
+        <p>Project ne tamara PC ma lavva mate:</p>
+        <div class="command-box">
+            git clone [REPO_URL_HERE]
+        </div>
+    </div>
+
+    <h2>3. Navi Branch Banavvi (Most Important)</h2>
+    <div class="step">
+        <p>Main code ne nuksan na thay etle potani branch ma kaam karo:</p>
+        <div class="command-box">
+            git checkout -b feature-tamaru-naam
+        </div>
+        <p><i>*Aa command thi navi branch banshe ane tame ema shift thai jasho.</i></p>
+    </div>
+
+    <h2>4. Code Push Kevireete Karvo?</h2>
+    <div class="step">
+        <p>Kaam thai gaya pachi code online mukva mate:</p>
+        <div class="command-box">
+            git add . <br>
+            git commit -m "Briefly explain what you changed"<br>
+            git push origin feature-tamaru-naam
+        </div>
+    </div>
+
+    <h2>5. Code Merge Kevireete Karvo?</h2>
+    <div class="step">
+        <p>Potano code <code>main</code> branch sathe jodva mate:</p>
+        <ol>
+            <li>GitHub par jao.</li>
+            <li><b>"Compare & pull request"</b> button par click karo.</li>
+            <li>Team leader (Nitesh) check kari ne <b>"Merge pull request"</b> dabshe.</li>
+        </ol>
+    </div>
+
+    <div class="note">
+        ⚠️ Dhyan Rakho: Kaam sharu karta pehla hamesha <code>git pull origin main</code> karo jethi badha no code up-to-date rahe.
+    </div>
+</div>
+
+</body>
+</html>

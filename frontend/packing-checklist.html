@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveloop — Packing Checklist</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+    <aside class="sidebar">
+        <div class="sidebar-logo"><h1><i class="fa-solid fa-paper-plane"></i> Traveloop</h1><span>Travel Beyond Gravity</span></div>
+        <nav class="sidebar-nav">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="trip-listing.html"><i class="fa-solid fa-suitcase"></i> My Trips</a>
+            <a href="create-trip.html"><i class="fa-solid fa-plus-circle"></i> Plan a Trip</a>
+            <a href="activity-search.html"><i class="fa-solid fa-compass"></i> Explore</a>
+            <a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="community.html"><i class="fa-solid fa-users"></i> Community</a>
+            <a href="packing-checklist.html" class="active"><i class="fa-solid fa-clipboard-check"></i> Packing</a>
+            <a href="trip-notes.html"><i class="fa-solid fa-book"></i> Notes</a>
+            <a href="invoice.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoice</a>
+            <a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a>
+        </nav>
+        <div class="sidebar-footer"><div class="avatar">JA</div><div class="user-info"><strong>James A.</strong><span>Traveler</span></div></div>
+    </aside>
+
+    <main class="main-content">
+        <div class="topbar"><h2><i class="fa-solid fa-clipboard-check"></i> Packing Checklist</h2></div>
+
+        <!-- Trip Info + Progress -->
+        <div class="glass-card" style="margin-bottom:2rem;" id="pack-header">
+            <h3 style="margin-bottom:6px;">Trip: Paris & Rome Adventure</h3>
+            <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:1rem;">Progress: <strong style="color:var(--neon-cyan);">5/12</strong> items packed</p>
+            <div class="progress-wrap"><div class="progress-bar" style="width:42%;"></div></div>
+        </div>
+
+        <div class="grid-3" id="pack-categories">
+            <!-- Documents -->
+            <div class="glass-card fade-in" id="pack-documents">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+                    <h4><i class="fa-solid fa-file-alt" style="color:var(--neon-cyan);"></i> Documents</h4>
+                    <span class="badge badge-cyan">3/4</span>
+                </div>
+                <div class="checklist-item checked"><input type="checkbox" checked id="pack-passport"><label for="pack-passport">Passport</label></div>
+                <div class="checklist-item checked"><input type="checkbox" checked id="pack-tickets"><label for="pack-tickets">Flight Tickets (printed)</label></div>
+                <div class="checklist-item checked"><input type="checkbox" checked id="pack-insurance"><label for="pack-insurance">Travel Insurance</label></div>
+                <div class="checklist-item"><input type="checkbox" id="pack-hotel"><label for="pack-hotel">Hotel Booking Confirmation</label></div>
+            </div>
+
+            <!-- Clothing -->
+            <div class="glass-card fade-in" style="animation-delay:.1s;" id="pack-clothing">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+                    <h4><i class="fa-solid fa-shirt" style="color:var(--neon-violet);"></i> Clothing</h4>
+                    <span class="badge badge-violet">1/4</span>
+                </div>
+                <div class="checklist-item checked"><input type="checkbox" checked id="pack-shirts"><label for="pack-shirts">Casual Shirts</label></div>
+                <div class="checklist-item"><input type="checkbox" id="pack-trousers"><label for="pack-trousers">Trousers / Jeans</label></div>
+                <div class="checklist-item"><input type="checkbox" id="pack-shoes"><label for="pack-shoes">Comfortable Walking Shoes</label></div>
+                <div class="checklist-item"><input type="checkbox" id="pack-jacket"><label for="pack-jacket">Light Jacket / Windbreaker</label></div>
+            </div>
+
+            <!-- Electronics -->
+            <div class="glass-card fade-in" style="animation-delay:.2s;" id="pack-electronics">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+                    <h4><i class="fa-solid fa-plug" style="color:var(--clr-cta);"></i> Electronics</h4>
+                    <span class="badge badge-orange">1/3</span>
+                </div>
+                <div class="checklist-item checked"><input type="checkbox" checked id="pack-charger"><label for="pack-charger">Phone Charger</label></div>
+                <div class="checklist-item"><input type="checkbox" id="pack-adapter"><label for="pack-adapter">Universal Power Adapter</label></div>
+                <div class="checklist-item"><input type="checkbox" id="pack-earphones"><label for="pack-earphones">Earphones / Headphones</label></div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;" id="pack-actions">
+            <button class="btn btn-primary" id="pack-add-btn"><i class="fa-solid fa-plus"></i> Add Item to Checklist</button>
+            <button class="btn btn-outline" id="pack-reset-btn"><i class="fa-solid fa-rotate-left"></i> Reset All</button>
+            <button class="btn btn-cta" id="pack-share-btn"><i class="fa-solid fa-share-nodes"></i> Share Checklist</button>
+        </div>
+    </main>
+</body>
+</html>
