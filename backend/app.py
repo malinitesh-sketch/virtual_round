@@ -4,14 +4,17 @@ Serves all API endpoints for the Traveloop travel planning application.
 Uses a JSON file as a lightweight database.
 """
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory, redirect
 from flask_cors import CORS
 import json
 import os
 import uuid
 from datetime import datetime
 
-app = Flask(__name__)
+# Serve frontend files from the ../frontend directory
+FRONTEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend'))
+
+app = Flask(__name__, static_folder=FRONTEND_DIR, static_url_path='')
 CORS(app)  # Enable CORS for frontend connection
 
 # ===== DATABASE SETUP =====
@@ -231,7 +234,14 @@ def init_db():
 # ===== ROOT / HEALTH CHECK =====
 @app.route('/')
 def home():
-    return jsonify({"message": "Traveloop Backend Running", "status": "ok"})
+    return app.send_static_file('index.html')
+
+@app.route('/<path:path>')
+def serve_frontend(path):
+    # Serve the requested file from the frontend folder, or fallback to index.html
+    if os.path.exists(os.path.join(FRONTEND_DIR, path)):
+        return send_from_directory(FRONTEND_DIR, path)
+    return app.send_static_file('index.html')
 
 @app.route('/api/test', methods=['GET'])
 def test():
@@ -530,7 +540,7 @@ if __name__ == '__main__':
     # Initialize DB if it doesn't exist
     if not os.path.exists(DB_PATH):
         init_db()
-        print("✅ Database initialized with seed data")
+        print("[OK] Database initialized with seed data")
     
-    print("🚀 Traveloop Backend starting on http://localhost:5000")
+    print("[START] Traveloop Backend starting on http://localhost:5000")
     app.run(debug=True, host='0.0.0.0', port=5000)

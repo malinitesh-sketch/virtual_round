@@ -1,80 +1,93 @@
-// API Configuration and Helper Functions
-// This file handles all communication between frontend and backend
+// ============================================================
+// Traveloop — API Client (Single Source of Truth)
+// All frontend-to-backend communication goes through here.
+// Backend: Flask on http://localhost:5000
+// ============================================================
 
 const API_BASE_URL = 'http://localhost:5000/api';
+const TOKEN_KEY = 'authToken';
+const USER_KEY = 'traveloop_user';
 
-/**
- * Generic fetch wrapper for API calls
- * @param {string} endpoint - API endpoint (e.g., '/trips')
- * @param {object} options - Fetch options (method, body, headers)
- * @returns {Promise} Response data
- */
+// ===== CORE FETCH WRAPPER =====
 async function apiCall(endpoint, options = {}) {
-  const defaultHeaders = {
-    'Content-Type': 'application/json',
-  };
+  const defaultHeaders = { 'Content-Type': 'application/json' };
 
-  // Add auth token if available
-  const token = localStorage.getItem('authToken');
+  const token = localStorage.getItem(TOKEN_KEY);
   if (token) {
-    defaultHeaders['Authorization'] = `Bearer ${token}`;
+    defaultHeaders['Authorization'] = 'Bearer ' + token;
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    const response = await fetch(API_BASE_URL + endpoint, {
       ...options,
-      headers: {
-        ...defaultHeaders,
-        ...options.headers,
-      },
+      headers: { ...defaultHeaders, ...options.headers },
     });
 
-    // Handle error responses
+    const data = await response.json().catch(() => ({}));
+
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || `API Error: ${response.status}`);
+      throw new Error(data.error || data.message || 'API Error: ' + response.status);
     }
 
-    return await response.json();
+    return data;
   } catch (error) {
-    console.error(`API Call Error (${endpoint}):`, error);
+    console.error('API Call Error (' + endpoint + '):', error);
     throw error;
   }
 }
 
-// ===== AUTH API CALLS =====
-async function registerUser(email, password, name) {
-  return apiCall('/auth/register', {
+// ===== AUTH =====
+async function registerUser(payload) {
+  // payload: { name, email, password, phone, city, country, profilePic }
+  const data = await apiCall('/auth/register', {
     method: 'POST',
-    body: JSON.stringify({ email, password, name }),
+    body: JSON.stringify(payload),
   });
+  if (data.token) {
+    localStorage.setItem(TOKEN_KEY, data.token);
+  }
+  if (data.user) {
+    localStorage.setItem(USER_KEY, JSON.stringify(data.user));
+  }
+  return data;
 }
 
 async function loginUser(email, password) {
-  const response = await apiCall('/auth/login', {
+  const data = await apiCall('/auth/login', {
     method: 'POST',
     body: JSON.stringify({ email, password }),
   });
-  
-  // Store token if login successful
-  if (response.token) {
-    localStorage.setItem('authToken', response.token);
+  if (data.token) {
+    localStorage.setItem(TOKEN_KEY, data.token);
   }
-  
-  return response;
+  if (data.user) {
+    localStorage.setItem(USER_KEY, JSON.stringify(data.user));
+  }
+  return data;
 }
 
-async function logoutUser() {
-  localStorage.removeItem('authToken');
+function logoutUser() {
+  localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(USER_KEY);
+  window.location.href = 'login.html';
 }
 
-// ===== TRIPS API CALLS =====
+function getStoredUser() {
+  try { return JSON.parse(localStorage.getItem(USER_KEY)); }
+  catch { return null; }
+}
+
+function isLoggedIn() {
+  return !!localStorage.getItem(TOKEN_KEY);
+}
+
+// ===== TRIPS =====
 async function fetchTrips() {
   return apiCall('/trips', { method: 'GET' });
 }
 
 async function fetchTripById(tripId) {
-  return apiCall(`/trips/${tripId}`, { method: 'GET' });
+  return apiCall('/trips/' + tripId, { method: 'GET' });
 }
 
 async function createTrip(tripData) {
@@ -85,33 +98,77 @@ async function createTrip(tripData) {
 }
 
 async function updateTrip(tripId, tripData) {
-  return apiCall(`/trips/${tripId}`, {
+  return apiCall('/trips/' + tripId, {
     method: 'PUT',
     body: JSON.stringify(tripData),
   });
 }
 
 async function deleteTrip(tripId) {
-  return apiCall(`/trips/${tripId}`, { method: 'DELETE' });
+  return apiCall('/trips/' + tripId, { method: 'DELETE' });
 }
 
-// ===== ACTIVITIES API CALLS =====
-async function fetchActivities(tripId) {
-  return apiCall(`/activities?tripId=${tripId}`, { method: 'GET' });
+// ===== ITINERARY =====
+async function fetchItinerary(tripId) {
+  return apiCall('/trips/' + tripId + '/itinerary', { method: 'GET' });
 }
 
-async function createActivity(activityData) {
-  return apiCall('/activities', {
+// ===== ACTIVITIES =====
+async function fetchActivities() {
+  return apiCall('/activities', { method: 'GET' });
+}
+
+// ===== COMMUNITY =====
+async function fetchCommunityPosts() {
+  return apiCall('/community', { method: 'GET' });
+}
+
+async function createCommunityPost(postData) {
+  return apiCall('/community', {
     method: 'POST',
-    body: JSON.stringify(activityData),
+    body: JSON.stringify(postData),
   });
 }
 
-async function deleteActivity(activityId) {
-  return apiCall(`/activities/${activityId}`, { method: 'DELETE' });
+// ===== NOTES =====
+async function fetchNotes(tripId) {
+  const query = tripId ? '?tripId=' + tripId : '';
+  return apiCall('/notes' + query, { method: 'GET' });
 }
 
-// ===== USER API CALLS =====
+async function createNote(noteData) {
+  return apiCall('/notes', {
+    method: 'POST',
+    body: JSON.stringify(noteData),
+  });
+}
+
+// ===== INVOICES =====
+async function fetchInvoices() {
+  return apiCall('/invoices', { method: 'GET' });
+}
+
+async function fetchInvoiceById(invoiceId) {
+  return apiCall('/invoices/' + invoiceId, { method: 'GET' });
+}
+
+async function markInvoicePaid(invoiceId) {
+  return apiCall('/invoices/' + invoiceId + '/mark-paid', { method: 'PUT' });
+}
+
+// ===== CHECKLISTS =====
+async function fetchChecklists() {
+  return apiCall('/checklists', { method: 'GET' });
+}
+
+async function updateChecklist(checklistId, data) {
+  return apiCall('/checklists/' + checklistId, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+}
+
+// ===== USER PROFILE =====
 async function fetchUserProfile() {
   return apiCall('/user/profile', { method: 'GET' });
 }
@@ -123,14 +180,23 @@ async function updateUserProfile(userData) {
   });
 }
 
-// ===== TEST CONNECTION =====
+// ===== ADMIN =====
+async function fetchAdminAnalytics() {
+  return apiCall('/admin/analytics', { method: 'GET' });
+}
+
+async function fetchAdminUsers() {
+  return apiCall('/admin/users', { method: 'GET' });
+}
+
+// ===== CONNECTION TEST =====
 async function testBackendConnection() {
   try {
-    const response = await apiCall('/test', { method: 'GET' });
-    console.log('✅ Backend connected:', response);
+    const data = await apiCall('/test', { method: 'GET' });
+    console.log('[OK] Backend connected:', data.message);
     return true;
   } catch (error) {
-    console.error('❌ Backend connection failed:', error);
+    console.warn('[WARN] Backend not reachable. Running in offline/static mode.');
     return false;
   }
 }

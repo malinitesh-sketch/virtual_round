@@ -33,6 +33,8 @@
             <a href="admin.html" id="nav-admin"><i class="fa-solid fa-shield-halved"></i> Admin</a>
             <hr style="margin: 15px 0; opacity: 0.2;">
             <a href="flow-slides.html" id="nav-flow" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 8px; margin: 0 -10px; padding: 10px; text-align: center; font-weight: bold;"><i class="fa-solid fa-slideshow"></i> App Flow</a>
+        <hr style="margin: 15px 0; opacity: 0.2;">
+            <a href="#" data-logout><i class="fa-solid fa-right-from-bracket" style="color: #ef4444;"></i> <span style="color: #ef4444;">Logout</span></a>
         </nav>
         <div class="sidebar-footer">
             <div class="avatar">JA</div>
@@ -163,27 +165,7 @@
     <!-- Load API Client -->
     <script src="api-client.js"></script>
     
-    <!-- Initialize Backend Connection -->
-    <script>
-        // Test backend connection when page loads
-        document.addEventListener('DOMContentLoaded', async () => {
-            console.log('🚀 Initializing Traveloop...');
-            const isConnected = await testBackendConnection();
-            
-            if (isConnected) {
-                console.log('✅ Backend API is connected');
-                // Load user trips
-                try {
-                    const tripsData = await fetchTrips();
-                    console.log('📍 Trips loaded:', tripsData);
-                } catch (error) {
-                    console.log('📌 Trips not yet available from backend');
-                }
-            } else {
-                console.warn('⚠️ Backend not running - running in offline mode');
-                console.warn('To enable backend: npm install && npm run dev (in /backend folder)');
-            }
-        });
-    </script>
+    <!-- Initialization logic is now in app.js -->
+    <script src="app.js"></script>
 </body>
 </html>
