@@ -18,49 +18,35 @@ def home():
 @app.route("/register", methods=["POST"])
 def register():
 
-    # Get data from frontend
-    data = request.get_json()
+    try:
+        data = request.get_json()
 
-    username = data.get("username")
-    password = data.get("password")
+        print("Received Data:", data)
 
-    # Validation
-    if not username or not password:
-        return jsonify({
-            "success": False,
-            "message": "Username and password required"
-        }), 400
+        if not data:
+            return jsonify({
+                "success": False,
+                "message": "No data received"
+            }), 400
 
-    # Success response
-    return jsonify({
-        "success": True,
-        "message": "Registration successful",
-        "username": username
-    }), 200
+        username = data.get("username")
+        password = data.get("password")
 
+        if not username or not password:
+            return jsonify({
+                "success": False,
+                "message": "Username and password required"
+            }), 400
 
-# Login API
-@app.route("/login", methods=["POST"])
-def login():
-
-    data = request.get_json()
-
-    username = data.get("username")
-    password = data.get("password")
-
-    # Dummy login check
-    if username == "admin" and password == "1234":
         return jsonify({
             "success": True,
-            "message": "Login successful"
+            "message": "Registration successful"
         }), 200
 
-    return jsonify({
-        "success": False,
-        "message": "Invalid username or password"
-    }), 401
+    except Exception as e:
+        print("ERROR:", str(e))
 
-
-# Run server
-if __name__ == "__main__":
-    app.run(debug=True)
+        return jsonify({
+            "success": False,
+            "message": str(e)
+        }), 500
