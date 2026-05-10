@@ -4,7 +4,7 @@
 // Backend: Flask on http://localhost:5000
 // ============================================================
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = window.location.protocol === 'file:' ? 'http://localhost:5000/api' : window.location.origin + '/api';
 const TOKEN_KEY = 'authToken';
 const USER_KEY = 'traveloop_user';
 
