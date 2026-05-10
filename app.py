@@ -55,3 +55,8 @@ def register():
             "success": False,
             "message": str(e)
         }), 500
+
+
+# Run server
+if __name__ == "__main__":
+    app.run(debug=True)
