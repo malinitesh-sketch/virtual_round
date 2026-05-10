@@ -426,16 +426,60 @@
     const form = document.getElementById('create-trip-form');
     if (!form) return;
 
+    const placeInput = document.getElementById('trip-place');
+    const startInput = document.getElementById('trip-start');
+    const endInput = document.getElementById('trip-end');
+    const durationDisplay = document.getElementById('trip-duration-display');
+    const daysCount = document.getElementById('trip-days-count');
+
+    // Calculate days dynamically
+    const calculateDays = () => {
+      if (startInput.value && endInput.value) {
+        const start = new Date(startInput.value);
+        const end = new Date(endInput.value);
+        const diffTime = end - start;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+        
+        if (diffDays >= 0) {
+          durationDisplay.style.display = 'block';
+          daysCount.textContent = diffDays + 1; // Inclusive of start day
+          endInput.style.borderColor = '';
+        } else {
+          durationDisplay.style.display = 'block';
+          daysCount.textContent = 'Invalid (End date before Start date)';
+          endInput.style.borderColor = '#ef4444';
+        }
+      } else {
+        durationDisplay.style.display = 'none';
+      }
+    };
+
+    if (startInput) startInput.addEventListener('change', calculateDays);
+    if (endInput) endInput.addEventListener('change', calculateDays);
+
     const continueBtn = document.getElementById('trip-continue');
     if (continueBtn) {
       continueBtn.addEventListener('click', async (e) => {
-        const place = document.getElementById('trip-place')?.value?.trim();
-        const startDate = document.getElementById('trip-start')?.value;
-        const endDate = document.getElementById('trip-end')?.value;
+        e.preventDefault(); // Always prevent default to validate first
+        
+        const place = placeInput?.value?.trim();
+        const startDate = startInput?.value;
+        const endDate = endInput?.value;
 
-        if (!place || !startDate || !endDate) return; // Let default link behavior work
+        if (!place || !startDate || !endDate) {
+          alert('Please fill out all fields (Place, Start Date, End Date).');
+          return;
+        }
 
-        e.preventDefault();
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        if (end < start) {
+          alert('End Date cannot be before Start Date!');
+          return;
+        }
+
+        const diffDays = Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1;
+
         try {
           const data = await createTrip({
             title: place + ' Trip',
@@ -443,7 +487,8 @@
             startDate: startDate,
             endDate: endDate,
             budget: 0,
-            cities: 1,
+            cities: 1, // Defaulting to 1 city for MVP
+            durationDays: diffDays
           });
           console.log('[OK] Trip created:', data);
           window.location.href = 'build-itinerary.html';
