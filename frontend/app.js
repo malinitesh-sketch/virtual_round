@@ -557,10 +557,90 @@
     const notesList = document.getElementById('notes-list');
     if (!notesList) return;
 
+    // Elements
+    const addBtnContainer = document.getElementById('add-note-btn-container');
+    const addNoteBtn = document.getElementById('notes-add-btn');
+    const formContainer = document.getElementById('add-note-form-container');
+    const cancelBtn = document.getElementById('cancel-note-btn');
+    const addForm = document.getElementById('add-note-form');
+
+    // Toggle Form
+    if (addNoteBtn && formContainer) {
+      addNoteBtn.addEventListener('click', () => {
+        formContainer.style.display = 'block';
+        addBtnContainer.style.display = 'none';
+      });
+    }
+
+    if (cancelBtn && formContainer) {
+      cancelBtn.addEventListener('click', () => {
+        formContainer.style.display = 'none';
+        addBtnContainer.style.display = 'block';
+        addForm.reset();
+      });
+    }
+
+    // Handle Note Submission
+    if (addForm) {
+      addForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const payload = {
+          title: document.getElementById('new-note-title').value,
+          category: document.getElementById('new-note-category').value,
+          date: document.getElementById('new-note-date').value,
+          content: document.getElementById('new-note-content').value,
+          day: 1 // Default day
+        };
+
+        try {
+          const newNote = await createNote(payload);
+          // Render new note at the top
+          const icons = {
+            'General': 'fa-book',
+            'Hotel': 'fa-hotel',
+            'Sightseeing': 'fa-camera',
+            'Flight': 'fa-plane',
+            'Food': 'fa-utensils'
+          };
+          const colors = {
+            'General': 'cyan',
+            'Hotel': 'orange',
+            'Sightseeing': 'violet',
+            'Flight': 'green',
+            'Food': 'red'
+          };
+          const colorClass = colors[payload.category] || 'cyan';
+          
+          const noteHtml = `
+            <div class="glass-card fade-in">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.8rem;">
+                    <div>
+                        <h4 style="font-size:.95rem;"><i class="fa-solid ${icons[payload.category] || 'fa-book'}" style="color:var(--neon-${colorClass});margin-right:6px;"></i> ${payload.title}</h4>
+                        <span style="font-size:.75rem;color:var(--text-muted);">New Note &middot; ${payload.date}</span>
+                    </div>
+                    <span class="badge badge-${colorClass}">${payload.category}</span>
+                </div>
+                <p style="font-size:.88rem;color:var(--text-muted);line-height:1.7;">${payload.content}</p>
+            </div>
+          `;
+          
+          notesList.insertAdjacentHTML('afterbegin', noteHtml);
+          
+          // Reset and close
+          addForm.reset();
+          formContainer.style.display = 'none';
+          addBtnContainer.style.display = 'block';
+        } catch (err) {
+          alert('Failed to add note: ' + err.message);
+        }
+      });
+    }
+
     try {
       const notes = await fetchNotes();
       if (!Array.isArray(notes) || notes.length === 0) return;
       console.log('[OK] Notes loaded from API:', notes.length);
+      // In a full implementation, you would re-render all notes from the backend here
     } catch (e) {
       console.log('Notes: Using static data');
     }
