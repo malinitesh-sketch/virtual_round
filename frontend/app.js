@@ -334,6 +334,17 @@
         });
       }
 
+      // PDF Export functionality
+      const exportBtn = document.getElementById('inv-export');
+      const downloadBtn = document.getElementById('inv-download');
+      
+      const printHandler = () => {
+        window.print();
+      };
+      
+      if (exportBtn) exportBtn.addEventListener('click', printHandler);
+      if (downloadBtn) downloadBtn.addEventListener('click', printHandler);
+
       console.log('[OK] Invoice loaded from API:', inv.id);
     } catch (e) {
       console.log('Invoice: Using static data');
@@ -576,6 +587,13 @@ Planned via Traveloop ✈️`;
       const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, '_blank');
     });
+
+    const pdfBtn = document.getElementById('itin-pdf-btn');
+    if (pdfBtn) {
+      pdfBtn.addEventListener('click', () => {
+        window.print();
+      });
+    }
   }
 
   // ===== INITIALIZATION =====

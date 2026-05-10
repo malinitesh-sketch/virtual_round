@@ -542,3 +542,13 @@ body::before {
   .auth-card { padding:1.5rem; }
   .topbar { flex-direction:column; align-items:flex-start; }
 }
+
+
+/* Print styles for PDF export */
+@media print {
+  .sidebar, .mobile-toggle, .btn, #inv-actions, .tabs { display: none !important; }
+  .main-content { margin-left: 0 !important; width: 100% !important; max-width: 100% !important; padding: 20px !important; }
+  body { background: #fff !important; color: #000 !important; }
+  .glass-card, .data-table { background: #fff !important; border: 1px solid #ddd !important; box-shadow: none !important; color: #000 !important; }
+  * { color: #000 !important; }
+}
