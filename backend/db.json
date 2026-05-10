@@ -51,14 +51,27 @@
       "country": "India",
       "photo": "",
       "createdAt": "2026-05-10T13:47:25.034904"
+    },
+    {
+      "id": "user-b04ffb",
+      "email": "abc@gmail.com",
+      "password": "12341234",
+      "name": "Roy uchiya",
+      "firstName": "Roy",
+      "lastName": "uchiya",
+      "phone": "+919638114523",
+      "city": "gajyabad",
+      "country": "India",
+      "photo": "",
+      "createdAt": "2026-05-10T13:56:22.034790"
     }
   ],
   "trips": [
     {
       "id": "trip-001",
       "userId": "user-001",
-      "title": "Europe Adventure 2025",
-      "destination": "Paris, Rome, Swiss Alps",
+      "title": "India Heritage Tour 2025",
+      "destination": "Jaipur, Agra, Manali",
       "startDate": "2025-06-10",
       "endDate": "2025-06-20",
       "status": "ongoing",
@@ -70,8 +83,8 @@
     {
       "id": "trip-002",
       "userId": "user-001",
-      "title": "Tokyo Exploration",
-      "destination": "Tokyo, Kyoto",
+      "title": "Kerala Backwaters",
+      "destination": "Munnar, Alleppey",
       "startDate": "2025-07-15",
       "endDate": "2025-07-25",
       "status": "upcoming",
@@ -83,8 +96,8 @@
     {
       "id": "trip-003",
       "userId": "user-001",
-      "title": "Bali Adventure",
-      "destination": "Bali",
+      "title": "Goa Beach Retreat",
+      "destination": "Goa",
       "startDate": "2024-12-10",
       "endDate": "2024-12-20",
       "status": "completed",
@@ -100,19 +113,19 @@
       "tripId": "trip-001",
       "sections": [
         {
-          "name": "Paris — City Exploration",
+          "name": "Jaipur — City Exploration",
           "dateRange": "Jun 10 – Jun 13",
           "budget": 4500,
           "info": "Explore iconic landmarks, enjoy French cuisine, and visit world-renowned museums."
         },
         {
-          "name": "Rome — Historical Tour",
+          "name": "Agra — Historical Tour",
           "dateRange": "Jun 14 – Jun 17",
           "budget": 3800,
-          "info": "Visit the Colosseum, Vatican City, and the Trevi Fountain."
+          "info": "Visit the Colosseum, Taj Mahal, and the Agra Fort."
         },
         {
-          "name": "Swiss Alps — Adventure",
+          "name": "Manali — Adventure",
           "dateRange": "Jun 18 – Jun 20",
           "budget": 5200,
           "info": "Hiking, skiing, and breathtaking mountain views."
@@ -121,23 +134,23 @@
       "days": [
         {
           "day": 1,
-          "title": "Arrival in Paris",
-          "description": "Arrive at CDG Airport, transfer to hotel, evening walk along Seine River"
+          "title": "Arrival in Jaipur",
+          "description": "Arrive at Jaipur Airport, transfer to hotel, evening walk along Jal Mahal"
         },
         {
           "day": 2,
-          "title": "Paris Exploration",
-          "description": "Visit Eiffel Tower, Louvre Museum, Champs-Élysées, French dinner"
+          "title": "Jaipur Exploration",
+          "description": "Visit Hawa Mahal, City Palace, Johari Bazaar, Rajasthani Thali"
         },
         {
           "day": 3,
-          "title": "Travel to Rome",
-          "description": "Morning flight to Rome, check-in at hotel, evening Colosseum visit"
+          "title": "Travel to Agra",
+          "description": "Morning flight to Agra, check-in at hotel, evening Colosseum visit"
         },
         {
           "day": 4,
-          "title": "Rome Discovery",
-          "description": "Vatican City, Trevi Fountain, Spanish Steps, authentic Italian pizza"
+          "title": "Agra Discovery",
+          "description": "Taj Mahal, Agra Fort, Fatehpur Sikri, authentic Mughlai cuisine"
         }
       ]
     }
@@ -145,50 +158,50 @@
   "activities": [
     {
       "id": "act-001",
-      "name": "Paragliding — Interlaken",
+      "name": "Paragliding — Solang Valley",
       "type": "Adventure",
       "price": 180,
-      "location": "Swiss Alps",
+      "location": "Manali",
       "rating": 4.8
     },
     {
       "id": "act-002",
-      "name": "Scuba Diving — Maldives",
+      "name": "Scuba Diving — Andaman Islands",
       "type": "Water Sport",
       "price": 250,
-      "location": "Maldives",
+      "location": "Andaman Islands",
       "rating": 4.9
     },
     {
       "id": "act-003",
-      "name": "Art Tour — Florence",
+      "name": "Art Tour — Udaipur",
       "type": "Cultural",
       "price": 95,
-      "location": "Florence",
+      "location": "Udaipur",
       "rating": 4.7
     },
     {
       "id": "act-004",
-      "name": "Hiking — Machu Picchu",
+      "name": "Hiking — Pangong Lake",
       "type": "Nature",
       "price": 320,
-      "location": "Peru",
+      "location": "Ladakh",
       "rating": 4.9
     },
     {
       "id": "act-005",
-      "name": "Food Tour — Tokyo",
+      "name": "Food Tour — Kerala",
       "type": "Culinary",
       "price": 75,
-      "location": "Tokyo",
+      "location": "Kerala",
       "rating": 4.6
     },
     {
       "id": "act-006",
-      "name": "Sailing — Santorini",
+      "name": "Sailing — Gokarna",
       "type": "Water Sport",
       "price": 200,
-      "location": "Santorini",
+      "location": "Gokarna",
       "rating": 4.8
     }
   ],
@@ -196,7 +209,7 @@
     {
       "id": "check-001",
       "tripId": "trip-001",
-      "tripName": "Paris & Rome Adventure",
+      "tripName": "Jaipur & Agra Tour",
       "categories": [
         {
           "name": "Documents",
@@ -266,7 +279,7 @@
       "userId": "user-002",
       "author": "Sarah Adams",
       "type": "Travel Tip",
-      "content": "Just got back from Bali! Pro tip: Visit Tegallalang Rice Terraces early morning.",
+      "content": "Just got back from Goa! Pro tip: Visit Dudhsagar Waterfalls early morning.",
       "likes": 42,
       "comments": 8,
       "createdAt": "2025-06-10T08:00:00Z"
@@ -276,7 +289,7 @@
       "userId": "user-003",
       "author": "Mike Kumar",
       "type": "Review",
-      "content": "Tokyo food tour was incredible! Tsukiji Outer Market is a must-visit.",
+      "content": "Kerala food tour was incredible! Fort Kochi spice market is a must-visit.",
       "likes": 89,
       "comments": 15,
       "createdAt": "2025-06-10T05:00:00Z"
@@ -286,7 +299,7 @@
       "userId": "user-002",
       "author": "Laura Peterson",
       "type": "Question",
-      "content": "Planning a 2-week Europe trip! Has anyone done Paris → Rome → Swiss Alps?",
+      "content": "Planning a 2-week Europe trip! Has anyone done Jaipur → Agra → Manali?",
       "likes": 23,
       "comments": 31,
       "createdAt": "2025-06-09T12:00:00Z"
@@ -296,7 +309,7 @@
     {
       "id": "note-001",
       "tripId": "trip-001",
-      "title": "Hotel check-in details — Paris",
+      "title": "Hotel check-in details — Jaipur",
       "content": "Check in after 2 PM, Room 415, breakfast included (7–10 AM).",
       "day": 1,
       "date": "2025-06-10",
@@ -305,8 +318,8 @@
     {
       "id": "note-002",
       "tripId": "trip-001",
-      "title": "Best photo spots — Eiffel Tower",
-      "content": "Trocadéro Gardens has the best view. Go early morning for fewer crowds.",
+      "title": "Best photo spots — Hawa Mahal",
+      "content": "Nahargarh Fort has the best view. Go early morning for fewer crowds.",
       "day": 2,
       "date": "2025-06-11",
       "category": "Sightseeing"
@@ -314,7 +327,7 @@
     {
       "id": "note-003",
       "tripId": "trip-001",
-      "title": "Hotel check-in details — Rome",
+      "title": "Hotel check-in details — Agra",
       "content": "Check in after 2 PM, Room 302, breakfast included (7–10 AM).",
       "day": 3,
       "date": "2025-06-14",
@@ -337,28 +350,28 @@
       "items": [
         {
           "category": "Hotel",
-          "description": "Hotel Booking — Paris",
+          "description": "Hotel Booking — Jaipur",
           "qty": "3 nights",
           "unitCost": 3000,
           "amount": 9000
         },
         {
           "category": "Travel",
-          "description": "Flight Bookings (DEL → PAR)",
+          "description": "Flight Bookings (DEL -> JAI)",
           "qty": "1",
           "unitCost": 12000,
           "amount": 12000
         },
         {
           "category": "Activity",
-          "description": "Eiffel Tower Tour",
+          "description": "Hawa Mahal Tour",
           "qty": "4 persons",
           "unitCost": 50,
           "amount": 200
         },
         {
           "category": "Food",
-          "description": "Dining — Paris restaurants",
+          "description": "Dining — Jaipur restaurants",
           "qty": "3 days",
           "unitCost": 150,
           "amount": 450
@@ -380,19 +393,19 @@
     "revenue": 2400000,
     "popularCities": [
       {
-        "name": "Paris",
+        "name": "Jaipur",
         "percentage": 92
       },
       {
-        "name": "Tokyo",
+        "name": "Kerala",
         "percentage": 85
       },
       {
-        "name": "Rome",
+        "name": "Agra",
         "percentage": 78
       },
       {
-        "name": "Bali",
+        "name": "Goa",
         "percentage": 71
       }
     ],

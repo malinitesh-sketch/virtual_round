@@ -269,7 +269,7 @@ def register():
         "phone": data.get('phone', ''),
         "city": data.get('city', ''),
         "country": data.get('country', ''),
-        "photo": "",
+        "photo": data.get('profilePic', ''),
         "createdAt": datetime.now().isoformat()
     }
     

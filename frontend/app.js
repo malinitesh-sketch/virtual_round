@@ -152,7 +152,17 @@
       const nameEls = document.querySelectorAll('.sidebar-footer .user-info strong');
       const initials = getInitials(user.name).toUpperCase();
 
-      avatarEls.forEach(el => el.textContent = initials);
+      avatarEls.forEach(el => {
+        if (user.photo) {
+          el.style.backgroundImage = 'url(' + user.photo + ')';
+          el.style.backgroundSize = 'cover';
+          el.style.backgroundPosition = 'center';
+          el.textContent = '';
+        } else {
+          el.textContent = initials;
+          el.style.backgroundImage = '';
+        }
+      });
       nameEls.forEach(el => el.textContent = user.name || 'Traveler');
 
       // Update welcome message if present
