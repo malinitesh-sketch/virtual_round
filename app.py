@@ -9,8 +9,7 @@ def register():
     print(data)
 
     return jsonify({
-        "success": True,
-        "message": "User registered"
+        "success": True
     })
 
 if __name__ == "__main__":
