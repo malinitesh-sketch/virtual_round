@@ -54,7 +54,6 @@ async function apiCall(endpoint, options = {}) {
     const method = (options.method || 'GET').toUpperCase();
     const body = options.body ? JSON.parse(options.body) : {};
 
-    // Auth endpoints in pure frontend mode
     if (endpoint === '/auth/register' && method === 'POST') {
       const users = getUsersStore();
       const email = String(body.email || '').trim().toLowerCase();
@@ -107,7 +106,6 @@ async function apiCall(endpoint, options = {}) {
       return { message: 'Offline mode active (API disabled)' };
     }
 
-    // Safe fallback for remaining app pages in offline mode
     if (method === 'GET') return [];
     return { success: true };
   }
