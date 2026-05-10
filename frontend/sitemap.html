@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Sitemap - Traveloop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="modern-style.css">
+    <style>
+        .sitemap-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .sitemap-level {
+            margin-bottom: 40px;
+        }
+
+        .sitemap-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sitemap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .sitemap-item {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .sitemap-item:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+
+        .sitemap-item.active {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+        }
+
+        .sitemap-item-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .sitemap-item-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sitemap-item-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .sitemap-item-url {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border);
+            font-family: monospace;
+        }
+
+        .flow-diagram {
+            background: var(--bg-light);
+            border-radius: var(--radius);
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px dashed var(--border);
+        }
+
+        .flow-box {
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            display: inline-block;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .flow-arrow {
+            display: inline-block;
+            margin: 0 10px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .sitemap-container {
+                padding: 20px;
+            }
+
+            .sitemap-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sitemap-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="main-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fa-solid fa-paper-plane"></i> Traveloop
+                </div>
+                <div class="sidebar-tagline">Travel Beyond Gravity ✈️</div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index-modern.html" id="nav-home">
+                    <i class="fa-solid fa-house"></i> Home
+                </a>
+                <a href="trip-listing-modern.html" id="nav-trips">
+                    <i class="fa-solid fa-suitcase"></i> My Trips
+                </a>
+                <a href="create-trip-modern.html" id="nav-plan">
+                    <i class="fa-solid fa-plus-circle"></i> Plan Trip
+                </a>
+                <a href="activity-search-modern.html" id="nav-explore">
+                    <i class="fa-solid fa-compass"></i> Explore
+                </a>
+                <a href="profile-modern.html" id="nav-profile">
+                    <i class="fa-solid fa-user"></i> Profile
+                </a>
+                <a href="community-modern.html" id="nav-community">
+                    <i class="fa-solid fa-users"></i> Community
+                </a>
+                <a href="packing-checklist-modern.html" id="nav-packing">
+                    <i class="fa-solid fa-clipboard-check"></i> Packing
+                </a>
+                <a href="trip-notes-modern.html" id="nav-notes">
+                    <i class="fa-solid fa-book"></i> Notes
+                </a>
+                <a href="invoice-modern.html" id="nav-invoice">
+                    <i class="fa-solid fa-file-invoice-dollar"></i> Invoice
+                </a>
+                <a href="admin-modern.html" id="nav-admin">
+                    <i class="fa-solid fa-shield-halved"></i> Admin
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">JA</div>
+                    <div class="user-info">
+                        <strong>James A.</strong>
+                        <small>Traveler</small>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+            <div class="topbar-title">
+                <i class="fa-solid fa-sitemap"></i> Website Sitemap
+            </div>
+            <div class="topbar-actions">
+                <div class="topbar-icons">
+                    <button class="icon-btn">
+                        <i class="fa-solid fa-bell"></i>
+                    </button>
+                    <button class="icon-btn">
+                        <i class="fa-solid fa-gear"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="sitemap-container">
+                <!-- PAGE HEADER -->
+                <div class="page-header">
+                    <h1 class="page-title">
+                        <i class="fa-solid fa-sitemap"></i>
+                        Complete Website Sitemap
+                    </h1>
+                    <p class="page-subtitle">Overview of all pages, their relationships, and navigation flow</p>
+                </div>
+
+                <!-- NAVIGATION FLOW -->
+                <div class="flow-diagram">
+                    <div style="font-weight: 600; color: var(--primary); margin-bottom: 15px;">User Navigation Flow:</div>
+                    <div style="overflow-x: auto; white-space: nowrap;">
+                        <span class="flow-box">🏠 Home</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-box">📋 My Trips</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-box">✈️ Create Trip</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-box">📅 Build Itinerary</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-box">💰 Invoice</span>
+                    </div>
+                </div>
+
+                <!-- AUTHENTICATION PAGES -->
+                <div class="sitemap-level">
+                    <div class="sitemap-title">
+                        <i class="fa-solid fa-lock"></i> Authentication
+                    </div>
+                    <div class="sitemap-grid">
+                        <div class="sitemap-item">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-sign-in-alt"></i>
+                            </div>
+                            <div class="sitemap-item-title">Login</div>
+                            <div class="sitemap-item-desc">User authentication with email and password</div>
+                            <div class="sitemap-item-url">login.html</div>
+                        </div>
+
+                        <div class="sitemap-item">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-user-plus"></i>
+                            </div>
+                            <div class="sitemap-item-title">Register</div>
+                            <div class="sitemap-item-desc">Create new account with personal details</div>
+                            <div class="sitemap-item-url">register.html</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MAIN PAGES -->
+                <div class="sitemap-level">
+                    <div class="sitemap-title">
+                        <i class="fa-solid fa-layer-group"></i> Main Pages
+                    </div>
+                    <div class="sitemap-grid">
+                        <div class="sitemap-item active">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-house"></i>
+                            </div>
+                            <div class="sitemap-item-title">
+                                Dashboard / Home
+                            </div>
+                            <div class="sitemap-item-desc">Main landing page with stats, quick actions, and trending destinations</div>
+                            <div class="sitemap-item-url">index-modern.html</div>
+                        </div>
+
+                        <div class="sitemap-item">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-suitcase"></i>
+                            </div>
+                            <div class="sitemap-item-title">My Trips</div>
+                            <div class="sitemap-item-desc">View all trips with filtering and status management</div>
+                            <div class="sitemap-item-url">trip-listing-modern.html</div>
+                        </div>
+
+                        <div class="sitemap-item">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-plus-circle"></i>
+                            </div>
+                            <div class="sitemap-item-title">Plan a Trip</div>
+                            <div class="sitemap-item-desc">Create new trip with destination, dates, and budget</div>
+                            <div class="sitemap-item-url">create-trip-modern.html</div>
+                        </div>
+
+                        <div class="sitemap-item">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <div class="sitemap-item-title">Profile</div>
+                            <div class="sitemap-item-desc">User account settings and personal information</div>
+                            <div class="sitemap-item-url">profile-modern.html</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TRIP MANAGEMENT -->
+                <div class="sitemap-level">
+                    <div class="sitemap-title">
+                        <i class="fa-solid fa-suitcase-rolling"></i> Trip Management
+                    </div>
+                    <div class="sitemap-grid">
+                        <div class="sitemap-item">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-calendar-days"></i>
+                            </div>
+                            <div class="sitemap-item-title">Build Itinerary</div>
+                            <div class="sitemap-item-desc">Create and organize trip sections with activities</div>
+                            <div class="sitemap-item-url">build-itinerary.html</div>
+                        </div>
+
+                        <div class="sitemap-item">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-eye"></i>
+                            </div>
+                            <div class="sitemap-item-title">Itinerary View</div>
+                            <div class="sitemap-item-desc">View detailed day-by-day itinerary and budget breakdown</div>
+                            <div class="sitemap-item-url">itinerary-view.html</div>
+                        </div>
+
+                        <div class="sitemap-item">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-clipboard-check"></i>
+                            </div>
+                            <div class="sitemap-item-title">Packing Checklist</div>
+                            <div class="sitemap-item-desc">Organize and track packing items for your trip</div>
+                            <div class="sitemap-item-url">packing-checklist-modern.html</div>
+                        </div>
+
+                        <div class="sitemap-item">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-book"></i>
+                            </div>
+                            <div class="sitemap-item-title">Trip Notes</div>
+                            <div class="sitemap-item-desc">Keep travel journal and important trip information</div>
+                            <div class="sitemap-item-url">trip-notes-modern.html</div>
+                        </div>
+
+                        <div class="sitemap-item">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-file-invoice-dollar"></i>
+                            </div>
+                            <div class="sitemap-item-title">Invoice & Billing</div>
+                            <div class="sitemap-item-desc">Track expenses and generate trip invoices</div>
+                            <div class="sitemap-item-url">invoice-modern.html</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EXPLORATION & COMMUNITY -->
+                <div class="sitemap-level">
+                    <div class="sitemap-title">
+                        <i class="fa-solid fa-globe"></i> Explore & Community
+                    </div>
+                    <div class="sitemap-grid">
+                        <div class="sitemap-item">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-compass"></i>
+                            </div>
+                            <div class="sitemap-item-title">Activity Search</div>
+                            <div class="sitemap-item-desc">Search and browse activities by destination or category</div>
+                            <div class="sitemap-item-url">activity-search-modern.html</div>
+                        </div>
+
+                        <div class="sitemap-item">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
+                            <div class="sitemap-item-title">Community</div>
+                            <div class="sitemap-item-desc">Share experiences and browse travel tips from other travelers</div>
+                            <div class="sitemap-item-url">community-modern.html</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ADMIN & SPECIAL -->
+                <div class="sitemap-level">
+                    <div class="sitemap-title">
+                        <i class="fa-solid fa-shield-halved"></i> Admin & Special Pages
+                    </div>
+                    <div class="sitemap-grid">
+                        <div class="sitemap-item">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <div class="sitemap-item-title">Admin Panel</div>
+                            <div class="sitemap-item-desc">Manage users, view analytics, and platform settings</div>
+                            <div class="sitemap-item-url">admin-modern.html</div>
+                        </div>
+
+                        <div class="sitemap-item">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-slideshow"></i>
+                            </div>
+                            <div class="sitemap-item-title">App Flow Presentation</div>
+                            <div class="sitemap-item-desc">Interactive slideshow of all 14 screens from Excalidraw</div>
+                            <div class="sitemap-item-url">flow-slides.html</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DESIGN RESOURCES -->
+                <div class="sitemap-level">
+                    <div class="sitemap-title">
+                        <i class="fa-solid fa-palette"></i> Design & Documentation
+                    </div>
+                    <div class="sitemap-grid">
+                        <div class="sitemap-item">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-book"></i>
+                            </div>
+                            <div class="sitemap-item-title">Modern Design System</div>
+                            <div class="sitemap-item-desc">Complete guide to the design system, components, and guidelines</div>
+                            <div class="sitemap-item-url">MODERN_DESIGN_SYSTEM.md</div>
+                        </div>
+
+                        <div class="sitemap-item">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-code"></i>
+                            </div>
+                            <div class="sitemap-item-title">Modern Style Sheet</div>
+                            <div class="sitemap-item-desc">Main CSS file with all design tokens and components</div>
+                            <div class="sitemap-item-url">modern-style.css</div>
+                        </div>
+
+                        <div class="sitemap-item">
+                            <div class="sitemap-item-icon">
+                                <i class="fa-solid fa-plug"></i>
+                            </div>
+                            <div class="sitemap-item-title">API Client</div>
+                            <div class="sitemap-item-desc">JavaScript file for frontend-backend communication</div>
+                            <div class="sitemap-item-url">api-client.js</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STATISTICS -->
+                <div class="card" style="margin-top: 40px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%); border-left: 4px solid var(--primary);">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-chart-pie"></i> Website Statistics
+                        </div>
+                    </div>
+                    <div class="grid grid-4">
+                        <div>
+                            <div style="font-size: 1.8rem; font-weight: 700; color: var(--primary);">16</div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">Main Pages</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.8rem; font-weight: 700; color: var(--success);">2</div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">Auth Pages</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.8rem; font-weight: 700; color: var(--warning);">3</div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">Documentation</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.8rem; font-weight: 700; color: var(--accent);">100%</div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">Responsive</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="api-client.js"></script>
+</body>
+</html>

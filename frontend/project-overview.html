@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traveloop Project Overview</title>
+  <style>
+    :root {
+      --bg: #f3f6ff;
+      --surface: #ffffff;
+      --surface-strong: #edf2ff;
+      --primary: #4f46e5;
+      --primary-soft: #eef2ff;
+      --accent: #f97316;
+      --accent-soft: #fff4e6;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: rgba(79, 70, 229, 0.15);
+      --radius: 24px;
+      --shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top left, rgba(99, 102, 241, 0.14), transparent 32%),
+                  radial-gradient(circle at bottom right, rgba(251, 146, 60, 0.12), transparent 28%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .page-wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 24px 48px;
+    }
+
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(79, 70, 229, 0.1);
+      color: var(--primary);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 3.5vw, 3.6rem);
+      letter-spacing: -0.04em;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.55rem;
+      color: var(--text);
+    }
+
+    p.lead {
+      max-width: 760px;
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .hero-card {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 24px;
+      align-items: center;
+      margin-top: 28px;
+      padding: 32px;
+      border-radius: var(--radius);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card strong {
+      color: var(--primary);
+    }
+
+    .hero-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .stat {
+      padding: 22px;
+      border-radius: 20px;
+      background: var(--primary-soft);
+      border: 1px solid rgba(79, 70, 229, 0.14);
+      box-shadow: 0 20px 40px rgba(79, 70, 229, 0.05);
+    }
+
+    .stat-title {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .section {
+      margin-top: 42px;
+    }
+
+    .section-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      padding: 28px;
+      border-radius: var(--radius);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.05);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      background: var(--surface-strong);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 16px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(249, 115, 22, 0.18);
+      margin-bottom: 16px;
+      max-width: fit-content;
+      font-weight: 600;
+    }
+
+    .link-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 22px;
+    }
+
+    .link-card {
+      padding: 20px 22px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      cursor: default;
+    }
+
+    .link-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+    }
+
+    .link-card span {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .code-block {
+      background: #111827;
+      color: #f8fafc;
+      padding: 20px;
+      border-radius: 18px;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      margin-top: 18px;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 22px;
+      padding: 14px 26px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #4338ca, #2563eb);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      text-decoration: none;
+      box-shadow: 0 18px 40px rgba(79, 70, 229, 0.18);
+    }
+
+    .footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(148, 163, 184, 0.18);
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer small {
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .hero-card,
+      .stats-grid,
+      .section-grid,
+      .link-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <header class="topbar">
+      <div>
+        <span class="badge">Traveloop Overview</span>
+        <h1>One-page summary of your travel planning app</h1>
+        <p class="lead">A clean, attractive project overview with inline styling and script. This single HTML file highlights backend, frontend, docs, features, and next steps.</p>
+      </div>
+      <div class="highlight">Native file: <strong>frontend/project-overview.html</strong></div>
+    </header>
+
+    <section class="hero-card">
+      <div>
+        <h2>Project status</h2>
+        <p><strong>Traveloop</strong> is a travel planning app with a working backend API, modern frontend pages, and Blackbox Copilot support. This overview is built as a fully self-contained page with inline CSS and JavaScript.</p>
+        <div class="tag-list">
+          <span class="tag">Backend API</span>
+          <span class="tag">Frontend portfolio</span>
+          <span class="tag">Blackbox support</span>
+          <span class="tag">One-page summary</span>
+        </div>
+      </div>
+      <div>
+        <div class="code-block">API URL: <strong>http://localhost:5000/api/health</strong></div>
+        <div class="code-block">Main files: <strong>README.md</strong>, <strong>BLACKBOX_GUIDE.md</strong>, <strong>api-client.js</strong></div>
+        <a class="cta-button" href="../README.md">Open README</a>
+      </div>
+    </section>
+
+    <div class="stats-grid">
+      <div class="stat"><p class="stat-title">Frontend pages ready</p><p class="stat-value">3+</p></div>
+      <div class="stat"><p class="stat-title">Documentation files</p><p class="stat-value">5+</p></div>
+      <div class="stat"><p class="stat-title">API endpoints</p><p class="stat-value">10+</p></div>
+      <div class="stat"><p class="stat-title">Design system</p><p class="stat-value">Modern + responsive</p></div>
+    </div>
+
+    <section class="section">
+      <div class="section-grid">
+        <div class="card">
+          <h3>Backend</h3>
+          <p>Your backend is built with Node.js and Express, and it includes route files, auth stubs, and a connection plan for MongoDB or MySQL. The server is configured for CORS and ready to integrate with frontend calls.</p>
+          <div class="tag-list">
+            <span class="tag">Express</span>
+            <span class="tag">.env config</span>
+            <span class="tag">CORS enabled</span>
+            <span class="tag">Route stubs</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Frontend</h3>
+          <p>The frontend uses reusable components, modern cards, grids, and API client integration. Pages are organized for trips, planning, profile, and documentation.</p>
+          <div class="tag-list">
+            <span class="tag">Inline JS</span>
+            <span class="tag">Responsive UI</span>
+            <span class="tag">Single-page overview</span>
+            <span class="tag">Modular pages</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Project highlights</h2>
+      <div class="link-grid">
+        <div class="link-card">
+          <strong>Core files</strong>
+          <span>README, BLACKBOX_GUIDE, SETUP_GUIDE, modern-style.css, api-client.js.</span>
+        </div>
+        <div class="link-card">
+          <strong>Design system</strong>
+          <span>Modern layout, sidebar + topbar structure, responsive grid system, and reusable cards.</span>
+        </div>
+        <div class="link-card">
+          <strong>Blackbox support</strong>
+          <span>Integration guide and prompts to generate backend routes, models, and frontend logic.</span>
+        </div>
+        <div class="link-card">
+          <strong>API readiness</strong>
+          <span>Health, test, auth, trips, activities, profile endpoints ready for implementation.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Project overview</h2>
+      <div class="card">
+        <h3>What this project includes</h3>
+        <p class="lead">This app is a travel planning platform with a working project structure, backend API connection, frontend design system, and AI-assisted development workflow.</p>
+        <div class="code-block">
+<code>Project structure:
+backend/   - Express server, routes, controllers, models
+frontend/  - HTML pages, API client, styles
+README.md  - Project overview
+BLACKBOX_GUIDE.md - AI integration guide
+</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>How to use it</h2>
+      <div class="section-grid">
+        <div class="card">
+          <h3>Step 1: Start backend</h3>
+          <p>Run your backend from the `backend` folder. Confirm `http://localhost:5000/api/health` returns a success message.</p>
+        </div>
+        <div class="card">
+          <h3>Step 2: Open frontend</h3>
+          <p>Open the frontend page in your browser. Use the overview page for a quick summary, then open the interactive dashboard or project pages.</p>
+        </div>
+      </div>
+      <div class="section-grid" style="margin-top: 20px;">
+        <div class="card">
+          <h3>Step 3: Use Blackbox</h3>
+          <p>Open `BLACKBOX_GUIDE.md`, install Blackbox AI, and write descriptive comments in backend files to generate code.</p>
+        </div>
+        <div class="card">
+          <h3>Step 4: Extend features</h3>
+          <p>Add database models, authentication, trip management, activity scheduling, and user profile updates using your current project structure.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Next steps</h2>
+      <div class="card">
+        <p class="lead">These are the highest-value actions to make the project fully operational.</p>
+        <ul style="padding-left: 20px; margin: 0; color: var(--muted);">
+          <li>Connect backend to MongoDB or MySQL</li>
+          <li>Implement Trip, User, and Activity models</li>
+          <li>Finish API endpoint logic and authentication</li>
+          <li>Wire frontend forms to backend API calls</li>
+          <li>Test pages and deploy to a cloud platform</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <small>Generated on <span id="timestamp"></span></small>
+      <small>File path: <strong>frontend/project-overview.html</strong></small>
+    </footer>
+  </div>
+
+  <script>
+    const timestamp = new Date().toLocaleString('en-US', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit'
+    });
+    document.getElementById('timestamp').textContent = timestamp;
+  </script>
+</body>
+</html>

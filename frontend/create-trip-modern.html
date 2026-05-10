@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan a Trip - Traveloop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="modern-style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="main-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fa-solid fa-paper-plane"></i> Traveloop
+                </div>
+                <div class="sidebar-tagline">Travel Beyond Gravity ✈️</div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index-modern.html" id="nav-home">
+                    <i class="fa-solid fa-house"></i> Home
+                </a>
+                <a href="trip-listing-modern.html" id="nav-trips">
+                    <i class="fa-solid fa-suitcase"></i> My Trips
+                </a>
+                <a href="create-trip-modern.html" class="active" id="nav-plan">
+                    <i class="fa-solid fa-plus-circle"></i> Plan Trip
+                </a>
+                <a href="activity-search-modern.html" id="nav-explore">
+                    <i class="fa-solid fa-compass"></i> Explore
+                </a>
+                <a href="profile-modern.html" id="nav-profile">
+                    <i class="fa-solid fa-user"></i> Profile
+                </a>
+                <a href="community-modern.html" id="nav-community">
+                    <i class="fa-solid fa-users"></i> Community
+                </a>
+                <a href="packing-checklist-modern.html" id="nav-packing">
+                    <i class="fa-solid fa-clipboard-check"></i> Packing
+                </a>
+                <a href="trip-notes-modern.html" id="nav-notes">
+                    <i class="fa-solid fa-book"></i> Notes
+                </a>
+                <a href="invoice-modern.html" id="nav-invoice">
+                    <i class="fa-solid fa-file-invoice-dollar"></i> Invoice
+                </a>
+                <a href="admin-modern.html" id="nav-admin">
+                    <i class="fa-solid fa-shield-halved"></i> Admin
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">JA</div>
+                    <div class="user-info">
+                        <strong>James A.</strong>
+                        <small>Traveler</small>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+            <div class="topbar-title">
+                <i class="fa-solid fa-plus-circle"></i> Plan a New Trip
+            </div>
+            <div class="topbar-actions">
+                <div class="topbar-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="topbar-icons">
+                    <button class="icon-btn">
+                        <i class="fa-solid fa-bell"></i>
+                    </button>
+                    <button class="icon-btn">
+                        <i class="fa-solid fa-gear"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- PAGE HEADER -->
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="fa-solid fa-rocket"></i>
+                    Create Your Next Adventure
+                </h1>
+                <p class="page-subtitle">Fill in the details below to start planning your perfect trip</p>
+            </div>
+
+            <!-- PROGRESS STEPS -->
+            <div style="display: flex; gap: 20px; margin-bottom: 30px; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 10px; flex: 1;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem;">1</div>
+                    <div>
+                        <div style="font-weight: 600; color: var(--text-primary);">Basic Info</div>
+                        <small style="color: var(--text-secondary);">Trip details</small>
+                    </div>
+                </div>
+                <div style="height: 2px; flex: 1; background: var(--border);"></div>
+                <div style="display: flex; align-items: center; gap: 10px; flex: 1; opacity: 0.5;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--border); color: var(--text-secondary); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem;">2</div>
+                    <div>
+                        <div style="font-weight: 600; color: var(--text-primary);">Dates & Budget</div>
+                        <small style="color: var(--text-secondary);">When & how much</small>
+                    </div>
+                </div>
+                <div style="height: 2px; flex: 1; background: var(--border);"></div>
+                <div style="display: flex; align-items: center; gap: 10px; flex: 1; opacity: 0.5;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--border); color: var(--text-secondary); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem;">3</div>
+                    <div>
+                        <div style="font-weight: 600; color: var(--text-primary);">Review</div>
+                        <small style="color: var(--text-secondary);">Confirm details</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORM CONTAINER -->
+            <div class="grid grid-2">
+                <!-- LEFT COLUMN: FORM -->
+                <div>
+                    <!-- Basic Information Section -->
+                    <div class="card" style="margin-bottom: 30px;">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-info-circle"></i> Basic Information
+                            </div>
+                        </div>
+
+                        <form id="tripForm">
+                            <div class="form-group">
+                                <label class="form-label required">Trip Name</label>
+<input type="text" class="form-control" placeholder="e.g., Delhi Adventure" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label required">Destination</label>
+<input type="text" class="form-control" placeholder="e.g., Delhi, India" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Trip Type</label>
+                                <select class="form-select">
+                                    <option>Select a type</option>
+                                    <option>Adventure</option>
+                                    <option>Beach</option>
+                                    <option>Cultural</option>
+                                    <option>Business</option>
+                                    <option>Family</option>
+                                    <option>Hiking</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Description</label>
+                                <textarea class="form-control" placeholder="Add details about your trip..."></textarea>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label required">Start Date</label>
+                                    <input type="date" class="form-control" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label required">End Date</label>
+                                    <input type="date" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Number of Travelers</label>
+                                    <input type="number" class="form-control" value="1" min="1">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label required">Total Budget</label>
+                                    <div style="display: flex; gap: 8px;">
+                                        <select class="form-select" style="width: 80px;">
+                                            <option>$</option>
+                                            <option>€</option>
+                                            <option>£</option>
+                                            <option>¥</option>
+                                        </select>
+                                        <input type="number" class="form-control" placeholder="5000" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Interests</label>
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                                    <div class="form-check">
+                                        <input type="checkbox" id="int-culture">
+                                        <label for="int-culture">Culture & History</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" id="int-adventure">
+                                        <label for="int-adventure">Adventure Sports</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" id="int-food">
+                                        <label for="int-food">Food & Cuisine</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" id="int-nature">
+                                        <label for="int-nature">Nature & Outdoors</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" id="int-nightlife">
+                                        <label for="int-nightlife">Nightlife</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" id="int-shopping">
+                                        <label for="int-shopping">Shopping</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN: PREVIEW -->
+                <div>
+                    <div class="card" style="background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%); position: sticky; top: 90px;">
+                        <div class="card-header">
+                            <div class="card-title">Trip Preview</div>
+                        </div>
+
+                        <div style="text-align: center; margin-bottom: 20px;">
+                            <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 12px; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2.5rem;">
+                                <i class="fa-solid fa-compass"></i>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <h3 style="margin-bottom: 10px; color: var(--text-primary);">Your Trip Preview</h3>
+                            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">Fill in the form to see your trip summary here</p>
+                        </div>
+
+                        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid var(--primary);">
+                            <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 5px;">TRIP NAME</div>
+                            <div style="font-weight: 600; color: var(--text-primary);">Your trip name here</div>
+                        </div>
+
+                        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid var(--accent);">
+                            <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 5px;">DESTINATION</div>
+                            <div style="font-weight: 600; color: var(--text-primary);">Add your destination</div>
+                        </div>
+
+                        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid var(--success);">
+                            <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 5px;">DURATION & BUDGET</div>
+                            <div style="font-weight: 600; color: var(--text-primary);">Days • $ Budget</div>
+                        </div>
+
+                        <div class="page-actions">
+                            <button class="btn btn-primary" style="width: 100%; justify-content: center;">
+                                <i class="fa-solid fa-check"></i> Next Step
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="page-actions" style="margin-top: 30px;">
+                <a href="index-modern.html" class="btn btn-secondary">
+                    <i class="fa-solid fa-arrow-left"></i> Cancel
+                </a>
+                <button class="btn btn-primary">
+                    <i class="fa-solid fa-check"></i> Create Trip & Continue
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script src="api-client.js"></script>
+    <script>
+        // Form validation and preview update
+        const form = document.getElementById('tripForm');
+        form.addEventListener('change', updatePreview);
+
+        function updatePreview() {
+            const tripName = form.querySelector('input[placeholder*="Delhi"]').value;
+            const destination = form.querySelector('input[placeholder*="Destination"]').value;
+            // Update preview here
+        }
+    </script>
+</body>
+</html>

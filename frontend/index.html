@@ -31,6 +31,8 @@
             <a href="trip-notes.html" id="nav-notes"><i class="fa-solid fa-book"></i> Notes</a>
             <a href="invoice.html" id="nav-invoice"><i class="fa-solid fa-file-invoice-dollar"></i> Invoice</a>
             <a href="admin.html" id="nav-admin"><i class="fa-solid fa-shield-halved"></i> Admin</a>
+            <hr style="margin: 15px 0; opacity: 0.2;">
+            <a href="flow-slides.html" id="nav-flow" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 8px; margin: 0 -10px; padding: 10px; text-align: center; font-weight: bold;"><i class="fa-solid fa-slideshow"></i> App Flow</a>
         </nav>
         <div class="sidebar-footer">
             <div class="avatar">JA</div>
@@ -88,8 +90,8 @@
                     <i class="fa-solid fa-tower-observation"></i>
                 </div>
                 <div class="card-body">
-                    <h4>Paris, France</h4>
-                    <p>City of lights — museums, cafés, and the Eiffel Tower</p>
+                    <h4>Delhi, India</h4>
+                    <p>City of forts — museums, cafés, and historic landmarks</p>
                     <span class="badge badge-cyan">Trending</span>
                 </div>
                 <div class="card-footer">
@@ -103,8 +105,8 @@
                     <i class="fa-solid fa-landmark"></i>
                 </div>
                 <div class="card-body">
-                    <h4>Rome, Italy</h4>
-                    <p>Ancient ruins, world-class art, and authentic Italian cuisine</p>
+                    <h4>Jaipur, India</h4>
+                    <p>Havelis, royal heritage, and delicious Rajasthani cuisine</p>
                     <span class="badge badge-violet">Popular</span>
                 </div>
                 <div class="card-footer">
@@ -118,8 +120,8 @@
                     <i class="fa-solid fa-torii-gate"></i>
                 </div>
                 <div class="card-body">
-                    <h4>Tokyo, Japan</h4>
-                    <p>Neon streets, ancient temples, and cutting-edge technology</p>
+                    <h4>Mumbai, India</h4>
+                    <p>Coastal vibes, iconic streets, and cutting-edge culture</p>
                     <span class="badge badge-orange">Hot</span>
                 </div>
                 <div class="card-footer">
@@ -140,8 +142,8 @@
                     <i class="fa-solid fa-mountain-sun"></i>
                 </div>
                 <div style="flex:1;">
-                    <h4 style="font-size:.95rem;">Bali Adventure</h4>
-                    <p style="font-size:.8rem;color:var(--text-muted);">Dec 10 – Dec 20, 2024 · 3 cities</p>
+                    <h4 style="font-size:.95rem;">Kerala Backwaters</h4>
+                    <p style="font-size:.8rem;color:var(--text-muted);">Dec 10 – Dec 20, 2024 · 3 stops</p>
                 </div>
                 <span class="badge badge-green">Completed</span>
             </div>
@@ -150,12 +152,38 @@
                     <i class="fa-solid fa-umbrella-beach"></i>
                 </div>
                 <div style="flex:1;">
-                    <h4 style="font-size:.95rem;">Maldives Retreat</h4>
-                    <p style="font-size:.8rem;color:var(--text-muted);">Aug 5 – Aug 12, 2024 · 1 resort</p>
+                    <h4 style="font-size:.95rem;">Goa Seaside Escape</h4>
+                    <p style="font-size:.8rem;color:var(--text-muted);">Aug 5 – Aug 12, 2024 · 1 beachfront stay</p>
                 </div>
                 <span class="badge badge-green">Completed</span>
             </div>
         </div>
     </main>
+
+    <!-- Load API Client -->
+    <script src="api-client.js"></script>
+    
+    <!-- Initialize Backend Connection -->
+    <script>
+        // Test backend connection when page loads
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('🚀 Initializing Traveloop...');
+            const isConnected = await testBackendConnection();
+            
+            if (isConnected) {
+                console.log('✅ Backend API is connected');
+                // Load user trips
+                try {
+                    const tripsData = await fetchTrips();
+                    console.log('📍 Trips loaded:', tripsData);
+                } catch (error) {
+                    console.log('📌 Trips not yet available from backend');
+                }
+            } else {
+                console.warn('⚠️ Backend not running - running in offline mode');
+                console.warn('To enable backend: npm install && npm run dev (in /backend folder)');
+            }
+        });
+    </script>
 </body>
 </html>

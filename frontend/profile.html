@@ -73,5 +73,33 @@
             <div class="dest-card"><div class="card-img" style="height:120px;background:linear-gradient(135deg,var(--clr-secondary),var(--neon-violet));"><i class="fa-solid fa-mosque"></i></div><div class="card-body"><h4>Dubai Luxury</h4><p>May 2024 · 5 days</p></div><div class="card-footer"><span>⭐ 4.9</span><a href="trip-notes.html" class="btn btn-ghost btn-sm">Memories</a></div></div>
         </div>
     </main>
+    <script src="app.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const userData = localStorage.getItem('traveloop_user');
+        if (!userData) return;
+        const user = JSON.parse(userData);
+
+        const avatar = document.getElementById('profile-avatar');
+        if (user.profilePic && avatar) {
+          avatar.style.backgroundImage = `url(${user.profilePic})`;
+          avatar.style.backgroundSize = 'cover';
+          avatar.style.backgroundPosition = 'center';
+          avatar.textContent = '';
+        }
+
+        const fullName = user.name || '';
+        const [firstName = '', lastName = ''] = fullName.split(' ');
+        document.getElementById('profile-fname').value = firstName;
+        document.getElementById('profile-lname').value = lastName;
+        document.getElementById('profile-email').value = user.email || '';
+        document.getElementById('profile-phone').value = user.phone || '';
+        document.getElementById('profile-city').value = user.city || '';
+        document.getElementById('profile-country').value = user.country || '';
+
+        const profileNameEls = document.querySelectorAll('.sidebar-footer .user-info strong');
+        profileNameEls.forEach(el => { el.textContent = fullName || 'Traveler'; });
+      });
+    </script>
 </body>
 </html>
