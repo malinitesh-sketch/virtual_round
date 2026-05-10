@@ -170,11 +170,15 @@ async function updateChecklist(checklistId, data) {
 
 // ===== USER PROFILE =====
 async function fetchUserProfile() {
-  return apiCall('/user/profile', { method: 'GET' });
+  const user = getStoredUser();
+  const userId = user ? user.id : '';
+  return apiCall('/user/profile?userId=' + userId, { method: 'GET' });
 }
 
 async function updateUserProfile(userData) {
-  return apiCall('/user/profile', {
+  const user = getStoredUser();
+  const userId = user ? user.id : '';
+  return apiCall('/user/profile?userId=' + userId, {
     method: 'PUT',
     body: JSON.stringify(userData),
   });

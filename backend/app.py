@@ -504,7 +504,15 @@ def mark_paid(invoice_id):
 @app.route('/api/user/profile', methods=['GET'])
 def get_profile():
     db = load_db()
-    user = db['users'][0] if db['users'] else None
+    user_id = request.args.get('userId')
+    
+    user = None
+    if user_id:
+        user = next((u for u in db['users'] if u['id'] == user_id), None)
+    
+    if not user and db['users']:
+        user = db['users'][0]
+        
     if not user:
         return jsonify({"error": "No user found"}), 404
     return jsonify({k: v for k, v in user.items() if k != 'password'})
@@ -513,13 +521,15 @@ def get_profile():
 def update_profile():
     data = request.get_json()
     db = load_db()
+    user_id = request.args.get('userId')
     
-    if db['users']:
-        db['users'][0].update({k: v for k, v in data.items() if k != 'password' and k != 'id'})
-        save_db(db)
-        return jsonify({k: v for k, v in db['users'][0].items() if k != 'password'})
-    
-    return jsonify({"error": "No user found"}), 404
+    for i, u in enumerate(db['users']):
+        if (user_id and u['id'] == user_id) or (not user_id and i == 0):
+            db['users'][i].update({k: v for k, v in data.items() if k != 'password' and k != 'id'})
+            save_db(db)
+            return jsonify({k: v for k, v in db['users'][i].items() if k != 'password'})
+            
+    return jsonify({"error": "User not found"}), 404
 
 
 # ===== ADMIN ENDPOINTS =====

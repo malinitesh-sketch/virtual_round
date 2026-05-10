@@ -38,6 +38,19 @@
       "country": "India",
       "photo": "",
       "createdAt": "2024-03-10T09:15:00Z"
+    },
+    {
+      "id": "user-39e1a2",
+      "email": "code94941@gmail.com",
+      "password": "12341234",
+      "name": "Roy uchiya",
+      "firstName": "",
+      "lastName": "",
+      "phone": "+919638114523",
+      "city": "gajyabad",
+      "country": "India",
+      "photo": "",
+      "createdAt": "2026-05-10T13:47:25.034904"
     }
   ],
   "trips": [
