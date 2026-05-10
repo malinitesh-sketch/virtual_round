@@ -4,12 +4,114 @@
 // Backend: Flask on http://localhost:5000
 // ============================================================
 
-const API_BASE_URL = window.location.protocol === 'file:' ? 'http://localhost:5000/api' : window.location.origin + '/api';
+const isFileProtocol = window.location.protocol === 'file:';
+const isLocalDevHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const isBackendPort = window.location.port === '5000';
+
+const API_BASE_URL = (isFileProtocol || (isLocalDevHost && !isBackendPort))
+  ? 'http://localhost:5000/api'
+  : window.location.origin + '/api';
 const TOKEN_KEY = 'authToken';
 const USER_KEY = 'traveloop_user';
+const USERS_KEY = 'traveloop_users';
+const OFFLINE_MODE = true;
+
+function getUsersStore() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+    if (Array.isArray(parsed)) return parsed;
+    return [];
+  } catch {
+    return [];
+  }
+}
+
+function saveUsersStore(users) {
+  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+}
+
+function buildToken() {
+  return 'local-' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+}
+
+function safeUser(user) {
+  if (!user) return null;
+  return {
+    id: user.id,
+    name: user.name || '',
+    email: user.email || '',
+    role: user.role || 'Traveler',
+    profilePic: user.profilePic || null,
+    phone: user.phone || '',
+    city: user.city || '',
+    country: user.country || '',
+  };
+}
 
 // ===== CORE FETCH WRAPPER =====
 async function apiCall(endpoint, options = {}) {
+  if (OFFLINE_MODE) {
+    const method = (options.method || 'GET').toUpperCase();
+    const body = options.body ? JSON.parse(options.body) : {};
+
+    // Auth endpoints in pure frontend mode
+    if (endpoint === '/auth/register' && method === 'POST') {
+      const users = getUsersStore();
+      const email = String(body.email || '').trim().toLowerCase();
+      const name = String(body.name || '').trim();
+
+      if (!name || !email || !body.password) {
+        throw new Error('name, email, password required');
+      }
+      if (users.some((u) => u.email === email)) {
+        throw new Error('Email already exists');
+      }
+
+      const newUser = {
+        id: 'user-' + Date.now(),
+        name,
+        email,
+        password: String(body.password),
+        role: 'Traveler',
+        profilePic: body.profilePic || null,
+        phone: body.phone || '',
+        city: body.city || '',
+        country: body.country || '',
+      };
+      users.push(newUser);
+      saveUsersStore(users);
+
+      return {
+        message: 'User registered',
+        token: buildToken(),
+        user: safeUser(newUser),
+      };
+    }
+
+    if (endpoint === '/auth/login' && method === 'POST') {
+      const users = getUsersStore();
+      const email = String(body.email || '').trim().toLowerCase();
+      const password = String(body.password || '');
+      const found = users.find((u) => u.email === email && u.password === password);
+      if (!found) {
+        throw new Error('Invalid credentials');
+      }
+      return {
+        message: 'Login success',
+        token: buildToken(),
+        user: safeUser(found),
+      };
+    }
+
+    if (endpoint === '/test' && method === 'GET') {
+      return { message: 'Offline mode active (API disabled)' };
+    }
+
+    // Safe fallback for remaining app pages in offline mode
+    if (method === 'GET') return [];
+    return { success: true };
+  }
+
   const defaultHeaders = { 'Content-Type': 'application/json' };
 
   const token = localStorage.getItem(TOKEN_KEY);
