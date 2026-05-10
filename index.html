@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Traveloop - Plan your perfect trip with AI-powered travel planning">
+    <title>Traveloop — Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Mobile Toggle -->
+    <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar" id="main-sidebar">
+        <div class="sidebar-logo">
+            <h1><i class="fa-solid fa-paper-plane"></i> Traveloop</h1>
+            <span>Travel Beyond Gravity</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="active" id="nav-home"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="trip-listing.html" id="nav-trips"><i class="fa-solid fa-suitcase"></i> My Trips</a>
+            <a href="create-trip.html" id="nav-plan"><i class="fa-solid fa-plus-circle"></i> Plan a Trip</a>
+            <a href="activity-search.html" id="nav-explore"><i class="fa-solid fa-compass"></i> Explore</a>
+            <a href="profile.html" id="nav-profile"><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="community.html" id="nav-community"><i class="fa-solid fa-users"></i> Community</a>
+            <a href="packing-checklist.html" id="nav-packing"><i class="fa-solid fa-clipboard-check"></i> Packing</a>
+            <a href="trip-notes.html" id="nav-notes"><i class="fa-solid fa-book"></i> Notes</a>
+            <a href="invoice.html" id="nav-invoice"><i class="fa-solid fa-file-invoice-dollar"></i> Invoice</a>
+            <a href="admin.html" id="nav-admin"><i class="fa-solid fa-shield-halved"></i> Admin</a>
+            <hr style="margin: 15px 0; opacity: 0.2;">
+            <a href="flow-slides.html" id="nav-flow" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 8px; margin: 0 -10px; padding: 10px; text-align: center; font-weight: bold;"><i class="fa-solid fa-slideshow"></i> App Flow</a>
+        <hr style="margin: 15px 0; opacity: 0.2;">
+            <a href="#" data-logout><i class="fa-solid fa-right-from-bracket" style="color: #ef4444;"></i> <span style="color: #ef4444;">Logout</span></a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="avatar">JA</div>
+            <div class="user-info">
+                <strong>James A.</strong>
+                <span>Traveler</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+        <!-- Topbar -->
+        <div class="topbar">
+            <h2>Welcome back, James! ✨</h2>
+            <div class="topbar-actions">
+                <a href="create-trip.html" class="btn btn-cta" id="dash-plan-btn"><i class="fa-solid fa-plus"></i> Plan a Trip</a>
+            </div>
+        </div>
+
+        <!-- Hero Banner -->
+        <div class="hero float-slow" id="dash-hero">
+            <h2><i class="fa-solid fa-rocket"></i> Explore the Universe of Travel</h2>
+            <p>Discover trending destinations, plan effortlessly, and let Traveloop handle the rest. Your next adventure awaits.</p>
+            <a href="activity-search.html" class="btn btn-primary" style="margin-top:1rem;width:fit-content;" id="dash-explore-btn">
+                <i class="fa-solid fa-compass"></i> Start Exploring
+            </a>
+        </div>
+
+        <!-- Search Bar -->
+        <div style="display:flex;justify-content:center;margin-bottom:2.5rem;">
+            <div class="search-bar" id="dash-search">
+                <i class="fa-solid fa-magnifying-glass" style="color:var(--text-muted);"></i>
+                <input type="text" placeholder="Search destinations, activities, cities..." id="dash-search-input">
+                <button type="button"><i class="fa-solid fa-search"></i> Search</button>
+            </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar" id="dash-filters">
+            <select id="dash-groupby"><option>Group by</option><option>Region</option><option>Budget</option></select>
+            <select id="dash-filter"><option>Filter</option><option>Beach</option><option>Mountains</option><option>City</option></select>
+            <select id="dash-sort"><option>Sort by...</option><option>Popular</option><option>Price</option><option>Rating</option></select>
+        </div>
+
+        <!-- Top Regional Selections -->
+        <div class="section-header">
+            <h3><i class="fa-solid fa-fire" style="color:var(--clr-cta);"></i> Top Regional Selections</h3>
+            <a href="activity-search.html" class="btn btn-ghost btn-sm">View All <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="grid-3" id="dash-trending" style="margin-bottom:2.5rem;">
+            <!-- Card 1 -->
+            <div class="dest-card" id="dest-paris" style="animation-delay:.1s">
+                <div class="card-img" style="background:linear-gradient(135deg,#5e63b6,#a393eb);">
+                    <i class="fa-solid fa-tower-observation"></i>
+                </div>
+                <div class="card-body">
+                    <h4>Delhi, India</h4>
+                    <p>City of forts — museums, cafés, and historic landmarks</p>
+                    <span class="badge badge-cyan">Trending</span>
+                </div>
+                <div class="card-footer">
+                    <span><i class="fa-solid fa-star" style="color:var(--clr-cta);"></i> 4.8</span>
+                    <a href="itinerary-view.html" class="btn btn-outline btn-sm">View <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="dest-card" id="dest-rome" style="animation-delay:.2s">
+                <div class="card-img" style="background:linear-gradient(135deg,#27296d,#5e63b6);">
+                    <i class="fa-solid fa-landmark"></i>
+                </div>
+                <div class="card-body">
+                    <h4>Jaipur, India</h4>
+                    <p>Havelis, royal heritage, and delicious Rajasthani cuisine</p>
+                    <span class="badge badge-violet">Popular</span>
+                </div>
+                <div class="card-footer">
+                    <span><i class="fa-solid fa-star" style="color:var(--clr-cta);"></i> 4.7</span>
+                    <a href="itinerary-view.html" class="btn btn-outline btn-sm">View <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="dest-card" id="dest-tokyo" style="animation-delay:.3s">
+                <div class="card-img" style="background:linear-gradient(135deg,#7c3aed,#a393eb);">
+                    <i class="fa-solid fa-torii-gate"></i>
+                </div>
+                <div class="card-body">
+                    <h4>Mumbai, India</h4>
+                    <p>Coastal vibes, iconic streets, and cutting-edge culture</p>
+                    <span class="badge badge-orange">Hot</span>
+                </div>
+                <div class="card-footer">
+                    <span><i class="fa-solid fa-star" style="color:var(--clr-cta);"></i> 4.9</span>
+                    <a href="itinerary-view.html" class="btn btn-outline btn-sm">View <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Previous Trips -->
+        <div class="section-header">
+            <h3><i class="fa-solid fa-clock-rotate-left" style="color:var(--neon-violet);"></i> Previous Trips</h3>
+            <a href="trip-listing.html" class="btn btn-ghost btn-sm">View All <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="grid-2" id="dash-prev-trips">
+            <div class="glass-card" style="display:flex;gap:1rem;align-items:center;" id="prev-trip-1">
+                <div style="width:60px;height:60px;border-radius:12px;background:linear-gradient(135deg,var(--neon-cyan),var(--neon-violet));display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">
+                    <i class="fa-solid fa-mountain-sun"></i>
+                </div>
+                <div style="flex:1;">
+                    <h4 style="font-size:.95rem;">Kerala Backwaters</h4>
+                    <p style="font-size:.8rem;color:var(--text-muted);">Dec 10 – Dec 20, 2024 · 3 stops</p>
+                </div>
+                <span class="badge badge-green">Completed</span>
+            </div>
+            <div class="glass-card" style="display:flex;gap:1rem;align-items:center;" id="prev-trip-2">
+                <div style="width:60px;height:60px;border-radius:12px;background:linear-gradient(135deg,var(--clr-cta),#fb923c);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">
+                    <i class="fa-solid fa-umbrella-beach"></i>
+                </div>
+                <div style="flex:1;">
+                    <h4 style="font-size:.95rem;">Goa Seaside Escape</h4>
+                    <p style="font-size:.8rem;color:var(--text-muted);">Aug 5 – Aug 12, 2024 · 1 beachfront stay</p>
+                </div>
+                <span class="badge badge-green">Completed</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Load API Client -->
+<script src="api-client.js"></script>
+    
+    <!-- Initialization logic is now in app.js -->
+    <script src="app.js"></script>
+</body>
+</html>
