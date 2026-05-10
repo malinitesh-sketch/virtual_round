@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveloop — Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+    <aside class="sidebar">
+        <div class="sidebar-logo"><h1><i class="fa-solid fa-paper-plane"></i> Traveloop</h1><span>Travel Beyond Gravity</span></div>
+        <nav class="sidebar-nav">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="trip-listing.html"><i class="fa-solid fa-suitcase"></i> My Trips</a>
+            <a href="create-trip.html"><i class="fa-solid fa-plus-circle"></i> Plan a Trip</a>
+            <a href="activity-search.html"><i class="fa-solid fa-compass"></i> Explore</a>
+            <a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="community.html"><i class="fa-solid fa-users"></i> Community</a>
+            <a href="packing-checklist.html"><i class="fa-solid fa-clipboard-check"></i> Packing</a>
+            <a href="trip-notes.html"><i class="fa-solid fa-book"></i> Notes</a>
+            <a href="invoice.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoice</a>
+            <a href="admin.html" class="active"><i class="fa-solid fa-shield-halved"></i> Admin</a>
+        </nav>
+        <div class="sidebar-footer"><div class="avatar" style="background:linear-gradient(135deg,#ef4444,var(--clr-cta));">AD</div><div class="user-info"><strong>Admin</strong><span>System</span></div></div>
+    </aside>
+
+    <main class="main-content">
+        <div class="topbar"><h2><i class="fa-solid fa-shield-halved"></i> Admin Panel</h2></div>
+
+        <!-- Stats Row -->
+        <div class="grid-4" style="margin-bottom:2rem;" id="admin-stats">
+            <div class="stat-card float" style="animation-delay:0s;"><div class="stat-icon cyan"><i class="fa-solid fa-users"></i></div><div class="stat-value">1,247</div><div class="stat-label">Total Users</div></div>
+            <div class="stat-card float" style="animation-delay:.5s;"><div class="stat-icon violet"><i class="fa-solid fa-route"></i></div><div class="stat-value">3,891</div><div class="stat-label">Total Trips</div></div>
+            <div class="stat-card float" style="animation-delay:1s;"><div class="stat-icon orange"><i class="fa-solid fa-city"></i></div><div class="stat-value">156</div><div class="stat-label">Cities Covered</div></div>
+            <div class="stat-card float" style="animation-delay:1.5s;"><div class="stat-icon green"><i class="fa-solid fa-dollar-sign"></i></div><div class="stat-value">$2.4M</div><div class="stat-label">Revenue</div></div>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:2rem;">
+            <!-- Manage Users -->
+            <div class="glass-card" id="admin-users">
+                <h3 style="margin-bottom:1rem;font-size:1rem;"><i class="fa-solid fa-users-gear" style="color:var(--neon-cyan);"></i> Manage Users</h3>
+                <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:1rem;">View all users, their trips, and account actions.</p>
+                <table class="data-table">
+                    <thead><tr><th>User</th><th>Trips</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr><td>James Anderson</td><td>12</td><td><span class="badge badge-green">Active</span></td></tr>
+                        <tr><td>Sarah Adams</td><td>8</td><td><span class="badge badge-green">Active</span></td></tr>
+                        <tr><td>Mike Kumar</td><td>15</td><td><span class="badge badge-green">Active</span></td></tr>
+                        <tr><td>Laura Peterson</td><td>3</td><td><span class="badge badge-orange">Inactive</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- User Trends & Analytics -->
+            <div class="glass-card" id="admin-analytics">
+                <h3 style="margin-bottom:1rem;font-size:1rem;"><i class="fa-solid fa-chart-line" style="color:var(--neon-violet);"></i> User Trends & Analytics</h3>
+                <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:1rem;">Monthly active users and trip creation trends.</p>
+                <div class="chart-bar-group" style="margin-bottom:2rem;">
+                    <div class="chart-bar" style="height:40%;"><span>Jan</span></div>
+                    <div class="chart-bar" style="height:55%;"><span>Feb</span></div>
+                    <div class="chart-bar" style="height:50%;"><span>Mar</span></div>
+                    <div class="chart-bar" style="height:70%;"><span>Apr</span></div>
+                    <div class="chart-bar" style="height:85%;"><span>May</span></div>
+                    <div class="chart-bar" style="height:95%;background:linear-gradient(to top,var(--neon-cyan),#22c55e);"><span>Jun</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <!-- Popular Cities -->
+            <div class="glass-card" id="admin-cities">
+                <h3 style="margin-bottom:1rem;font-size:1rem;"><i class="fa-solid fa-ranking-star" style="color:var(--clr-cta);"></i> Popular Cities</h3>
+                <div style="display:flex;flex-direction:column;gap:.8rem;">
+                    <div style="display:flex;align-items:center;gap:1rem;"><span style="font-size:.85rem;width:100px;">Paris</span><div class="progress-wrap" style="flex:1;"><div class="progress-bar" style="width:92%;"></div></div><span style="font-size:.8rem;color:var(--text-muted);">92%</span></div>
+                    <div style="display:flex;align-items:center;gap:1rem;"><span style="font-size:.85rem;width:100px;">Tokyo</span><div class="progress-wrap" style="flex:1;"><div class="progress-bar" style="width:85%;background:linear-gradient(90deg,var(--neon-violet),var(--neon-purple));"></div></div><span style="font-size:.8rem;color:var(--text-muted);">85%</span></div>
+                    <div style="display:flex;align-items:center;gap:1rem;"><span style="font-size:.85rem;width:100px;">Rome</span><div class="progress-wrap" style="flex:1;"><div class="progress-bar" style="width:78%;background:linear-gradient(90deg,var(--clr-cta),#fb923c);"></div></div><span style="font-size:.8rem;color:var(--text-muted);">78%</span></div>
+                    <div style="display:flex;align-items:center;gap:1rem;"><span style="font-size:.85rem;width:100px;">Bali</span><div class="progress-wrap" style="flex:1;"><div class="progress-bar" style="width:71%;background:linear-gradient(90deg,#22c55e,var(--neon-cyan));"></div></div><span style="font-size:.8rem;color:var(--text-muted);">71%</span></div>
+                </div>
+            </div>
+
+            <!-- Popular Activities -->
+            <div class="glass-card" id="admin-activities">
+                <h3 style="margin-bottom:1rem;font-size:1rem;"><i class="fa-solid fa-fire" style="color:#ef4444;"></i> Popular Activities</h3>
+                <div style="display:flex;flex-direction:column;gap:.8rem;">
+                    <div style="display:flex;align-items:center;gap:1rem;"><span style="font-size:.85rem;width:100px;">Hiking</span><div class="progress-wrap" style="flex:1;"><div class="progress-bar" style="width:88%;"></div></div><span style="font-size:.8rem;color:var(--text-muted);">88%</span></div>
+                    <div style="display:flex;align-items:center;gap:1rem;"><span style="font-size:.85rem;width:100px;">Scuba Diving</span><div class="progress-wrap" style="flex:1;"><div class="progress-bar" style="width:75%;background:linear-gradient(90deg,var(--neon-violet),var(--neon-purple));"></div></div><span style="font-size:.8rem;color:var(--text-muted);">75%</span></div>
+                    <div style="display:flex;align-items:center;gap:1rem;"><span style="font-size:.85rem;width:100px;">Food Tours</span><div class="progress-wrap" style="flex:1;"><div class="progress-bar" style="width:82%;background:linear-gradient(90deg,var(--clr-cta),#fb923c);"></div></div><span style="font-size:.8rem;color:var(--text-muted);">82%</span></div>
+                    <div style="display:flex;align-items:center;gap:1rem;"><span style="font-size:.85rem;width:100px;">Paragliding</span><div class="progress-wrap" style="flex:1;"><div class="progress-bar" style="width:60%;background:linear-gradient(90deg,#22c55e,var(--neon-cyan));"></div></div><span style="font-size:.8rem;color:var(--text-muted);">60%</span></div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

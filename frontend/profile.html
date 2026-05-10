@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveloop — Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+    <aside class="sidebar">
+        <div class="sidebar-logo"><h1><i class="fa-solid fa-paper-plane"></i> Traveloop</h1><span>Travel Beyond Gravity</span></div>
+        <nav class="sidebar-nav">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="trip-listing.html"><i class="fa-solid fa-suitcase"></i> My Trips</a>
+            <a href="create-trip.html"><i class="fa-solid fa-plus-circle"></i> Plan a Trip</a>
+            <a href="activity-search.html"><i class="fa-solid fa-compass"></i> Explore</a>
+            <a href="profile.html" class="active"><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="community.html"><i class="fa-solid fa-users"></i> Community</a>
+            <a href="packing-checklist.html"><i class="fa-solid fa-clipboard-check"></i> Packing</a>
+            <a href="trip-notes.html"><i class="fa-solid fa-book"></i> Notes</a>
+            <a href="invoice.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoice</a>
+            <a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a>
+        </nav>
+        <div class="sidebar-footer"><div class="avatar">JA</div><div class="user-info"><strong>James A.</strong><span>Traveler</span></div></div>
+    </aside>
+
+    <main class="main-content">
+        <div class="topbar"><h2><i class="fa-solid fa-user"></i> User Profile</h2></div>
+
+        <!-- Profile Header -->
+        <div class="glass-card" style="display:flex;gap:2rem;align-items:center;margin-bottom:2rem;flex-wrap:wrap;" id="profile-header">
+            <div class="avatar-lg glow-pulse" id="profile-avatar">JA</div>
+            <div style="flex:1;min-width:200px;">
+                <h3 style="font-size:1.4rem;margin-bottom:4px;">James Anderson</h3>
+                <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:.8rem;">james.anderson@email.com · New York, USA</p>
+                <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+                    <div><strong style="color:var(--neon-cyan);font-size:1.2rem;">12</strong><br><span style="font-size:.75rem;color:var(--text-muted);">Trips</span></div>
+                    <div><strong style="color:var(--neon-violet);font-size:1.2rem;">8</strong><br><span style="font-size:.75rem;color:var(--text-muted);">Countries</span></div>
+                    <div><strong style="color:var(--clr-cta);font-size:1.2rem;">24</strong><br><span style="font-size:.75rem;color:var(--text-muted);">Cities</span></div>
+                </div>
+            </div>
+            <button class="btn btn-outline" id="profile-edit-btn"><i class="fa-solid fa-pen"></i> Edit Profile</button>
+        </div>
+
+        <!-- User Details -->
+        <div class="glass-card fade-in" style="margin-bottom:2rem;" id="profile-details">
+            <h3 style="margin-bottom:1.2rem;font-size:1rem;"><i class="fa-solid fa-info-circle" style="color:var(--neon-cyan);"></i> Personal Details</h3>
+            <div class="grid-2">
+                <div class="form-group"><label>First Name</label><input type="text" class="form-control" value="James" id="profile-fname"></div>
+                <div class="form-group"><label>Last Name</label><input type="text" class="form-control" value="Anderson" id="profile-lname"></div>
+                <div class="form-group"><label>Email</label><input type="email" class="form-control" value="james.anderson@email.com" id="profile-email"></div>
+                <div class="form-group"><label>Phone</label><input type="tel" class="form-control" value="+1 234 567 890" id="profile-phone"></div>
+                <div class="form-group"><label>City</label><input type="text" class="form-control" value="New York" id="profile-city"></div>
+                <div class="form-group"><label>Country</label><input type="text" class="form-control" value="United States" id="profile-country"></div>
+            </div>
+        </div>
+
+        <!-- Preplanned Trips -->
+        <div class="section-header"><h3><i class="fa-solid fa-calendar-days" style="color:var(--neon-cyan);"></i> Preplanned Trips</h3></div>
+        <div class="grid-3" style="margin-bottom:2rem;" id="profile-preplanned">
+            <div class="dest-card"><div class="card-img" style="height:120px;background:linear-gradient(135deg,var(--neon-cyan),var(--clr-secondary));"><i class="fa-solid fa-torii-gate"></i></div><div class="card-body"><h4>Tokyo 2025</h4><p>Jul 15 – Jul 25</p></div><div class="card-footer"><span class="badge badge-cyan">Upcoming</span><a href="build-itinerary.html" class="btn btn-ghost btn-sm">Edit</a></div></div>
+            <div class="dest-card"><div class="card-img" style="height:120px;background:linear-gradient(135deg,var(--neon-violet),var(--neon-purple));"><i class="fa-solid fa-umbrella-beach"></i></div><div class="card-body"><h4>Maldives</h4><p>Aug 5 – Aug 12</p></div><div class="card-footer"><span class="badge badge-violet">Planning</span><a href="build-itinerary.html" class="btn btn-ghost btn-sm">Edit</a></div></div>
+            <div class="dest-card"><div class="card-img" style="height:120px;background:linear-gradient(135deg,var(--clr-primary),var(--clr-secondary));"><i class="fa-solid fa-plane"></i></div><div class="card-body"><h4>Europe 2025</h4><p>Jun 10 – Jun 20</p></div><div class="card-footer"><span class="badge badge-green">Active</span><a href="itinerary-view.html" class="btn btn-ghost btn-sm">View</a></div></div>
+        </div>
+
+        <!-- Previous Trips -->
+        <div class="section-header"><h3><i class="fa-solid fa-images" style="color:var(--neon-violet);"></i> Previous Trips</h3></div>
+        <div class="grid-3" id="profile-past">
+            <div class="dest-card"><div class="card-img" style="height:120px;background:linear-gradient(135deg,var(--clr-cta),#fb923c);"><i class="fa-solid fa-mountain-sun"></i></div><div class="card-body"><h4>Bali Adventure</h4><p>Dec 2024 · 10 days</p></div><div class="card-footer"><span>⭐ 4.8</span><a href="trip-notes.html" class="btn btn-ghost btn-sm">Memories</a></div></div>
+            <div class="dest-card"><div class="card-img" style="height:120px;background:linear-gradient(135deg,#22c55e,var(--neon-cyan));"><i class="fa-solid fa-building"></i></div><div class="card-body"><h4>NYC City Break</h4><p>Oct 2024 · 7 days</p></div><div class="card-footer"><span>⭐ 4.5</span><a href="trip-notes.html" class="btn btn-ghost btn-sm">Memories</a></div></div>
+            <div class="dest-card"><div class="card-img" style="height:120px;background:linear-gradient(135deg,var(--clr-secondary),var(--neon-violet));"><i class="fa-solid fa-mosque"></i></div><div class="card-body"><h4>Dubai Luxury</h4><p>May 2024 · 5 days</p></div><div class="card-footer"><span>⭐ 4.9</span><a href="trip-notes.html" class="btn btn-ghost btn-sm">Memories</a></div></div>
+        </div>
+    </main>
+</body>
+</html>

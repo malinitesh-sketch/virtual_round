@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Traveloop - Login to your travel planning account">
+    <title>Traveloop — Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- ===== LOGIN PAGE ===== -->
+    <div class="auth-page">
+        <div class="auth-card float-slow glow-pulse">
+            <!-- Logo -->
+            <h2><i class="fa-solid fa-paper-plane"></i> Traveloop</h2>
+            <p class="subtitle">Your journey begins here</p>
+
+            <!-- Login Form -->
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-username"><i class="fa-solid fa-user"></i> Username</label>
+                    <input type="text" id="login-username" class="form-control" placeholder="Enter your username">
+                </div>
+                <div class="form-group">
+                    <label for="login-password"><i class="fa-solid fa-lock"></i> Password</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="Enter your password">
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;">
+                    <label style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--text-muted);cursor:pointer;">
+                        <input type="checkbox" id="login-remember" style="accent-color:var(--neon-cyan);"> Remember me
+                    </label>
+                    <a href="#" style="font-size:.82rem;">Forgot Password?</a>
+                </div>
+                <a href="index.html" class="btn btn-primary" style="width:100%;justify-content:center;" id="login-btn">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login
+                </a>
+            </form>
+
+            <!-- Toggle to Register -->
+            <p class="auth-footer">
+                Don't have an account? <a href="register.html" id="login-to-register">Create Account</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

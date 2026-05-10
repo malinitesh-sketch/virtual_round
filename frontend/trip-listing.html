@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveloop — My Trips</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+    <aside class="sidebar">
+        <div class="sidebar-logo"><h1><i class="fa-solid fa-paper-plane"></i> Traveloop</h1><span>Travel Beyond Gravity</span></div>
+        <nav class="sidebar-nav">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="trip-listing.html" class="active"><i class="fa-solid fa-suitcase"></i> My Trips</a>
+            <a href="create-trip.html"><i class="fa-solid fa-plus-circle"></i> Plan a Trip</a>
+            <a href="activity-search.html"><i class="fa-solid fa-compass"></i> Explore</a>
+            <a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="community.html"><i class="fa-solid fa-users"></i> Community</a>
+            <a href="packing-checklist.html"><i class="fa-solid fa-clipboard-check"></i> Packing</a>
+            <a href="trip-notes.html"><i class="fa-solid fa-book"></i> Notes</a>
+            <a href="invoice.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoice</a>
+            <a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a>
+        </nav>
+        <div class="sidebar-footer"><div class="avatar">JA</div><div class="user-info"><strong>James A.</strong><span>Traveler</span></div></div>
+    </aside>
+
+    <main class="main-content">
+        <div class="topbar">
+            <h2><i class="fa-solid fa-suitcase"></i> My Trips</h2>
+            <a href="create-trip.html" class="btn btn-cta"><i class="fa-solid fa-plus"></i> New Trip</a>
+        </div>
+
+        <!-- Search + Filters -->
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center;">
+            <div class="search-bar" style="max-width:400px;">
+                <i class="fa-solid fa-magnifying-glass" style="color:var(--text-muted);"></i>
+                <input type="text" placeholder="Search trips..." id="trips-search">
+                <button type="button"><i class="fa-solid fa-search"></i></button>
+            </div>
+            <select class="form-control" style="width:auto;max-width:150px;" id="trips-groupby"><option>Group by</option><option>Status</option><option>Date</option></select>
+            <select class="form-control" style="width:auto;max-width:150px;" id="trips-filter"><option>Filter</option><option>Domestic</option><option>International</option></select>
+            <select class="form-control" style="width:auto;max-width:150px;" id="trips-sort"><option>Sort by...</option><option>Newest</option><option>Budget</option></select>
+        </div>
+
+        <!-- Ongoing -->
+        <div class="section-header"><h3><span class="badge badge-green" style="margin-right:8px;">●</span> Ongoing</h3></div>
+        <div class="glass-card" style="display:flex;gap:1.2rem;align-items:center;margin-bottom:2rem;" id="trip-ongoing-1">
+            <div style="width:70px;height:70px;border-radius:var(--radius-sm);background:linear-gradient(135deg,#22c55e,var(--neon-cyan));display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0;"><i class="fa-solid fa-plane"></i></div>
+            <div style="flex:1;">
+                <h4>Europe Adventure 2025</h4>
+                <p style="font-size:.85rem;color:var(--text-muted);">Paris → Rome → Swiss Alps · Jun 10 – Jun 20</p>
+                <div class="progress-wrap" style="margin-top:8px;max-width:300px;"><div class="progress-bar" style="width:40%;"></div></div>
+            </div>
+            <div style="text-align:right;">
+                <span class="badge badge-green">Day 4/10</span>
+                <div style="margin-top:8px;"><a href="itinerary-view.html" class="btn btn-outline btn-sm">View <i class="fa-solid fa-arrow-right"></i></a></div>
+            </div>
+        </div>
+
+        <!-- Upcoming -->
+        <div class="section-header"><h3><span class="badge badge-cyan" style="margin-right:8px;">●</span> Upcoming</h3></div>
+        <div class="grid-2" style="margin-bottom:2rem;" id="trips-upcoming">
+            <div class="glass-card" id="trip-upcoming-1">
+                <div style="display:flex;gap:1rem;align-items:center;">
+                    <div style="width:55px;height:55px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--neon-cyan),var(--clr-secondary));display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;"><i class="fa-solid fa-torii-gate"></i></div>
+                    <div><h4 style="font-size:.95rem;">Tokyo Exploration</h4><p style="font-size:.8rem;color:var(--text-muted);">Jul 15 – Jul 25 · 2 cities</p></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem;">
+                    <span class="badge badge-cyan">In 35 days</span>
+                    <a href="build-itinerary.html" class="btn btn-ghost btn-sm">Edit <i class="fa-solid fa-pen"></i></a>
+                </div>
+            </div>
+            <div class="glass-card" id="trip-upcoming-2">
+                <div style="display:flex;gap:1rem;align-items:center;">
+                    <div style="width:55px;height:55px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--neon-violet),var(--neon-purple));display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;"><i class="fa-solid fa-umbrella-beach"></i></div>
+                    <div><h4 style="font-size:.95rem;">Maldives Getaway</h4><p style="font-size:.8rem;color:var(--text-muted);">Aug 5 – Aug 12 · 1 resort</p></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem;">
+                    <span class="badge badge-violet">In 56 days</span>
+                    <a href="build-itinerary.html" class="btn btn-ghost btn-sm">Edit <i class="fa-solid fa-pen"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completed -->
+        <div class="section-header"><h3><span class="badge badge-orange" style="margin-right:8px;">●</span> Completed</h3></div>
+        <div class="grid-2" id="trips-completed">
+            <div class="glass-card" id="trip-completed-1">
+                <div style="display:flex;gap:1rem;align-items:center;">
+                    <div style="width:55px;height:55px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--clr-cta),#fb923c);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;"><i class="fa-solid fa-mountain-sun"></i></div>
+                    <div><h4 style="font-size:.95rem;">Bali Adventure</h4><p style="font-size:.8rem;color:var(--text-muted);">Dec 10 – Dec 20, 2024</p></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem;">
+                    <span class="badge badge-orange">Completed</span>
+                    <a href="itinerary-view.html" class="btn btn-ghost btn-sm">Review <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="glass-card" id="trip-completed-2">
+                <div style="display:flex;gap:1rem;align-items:center;">
+                    <div style="width:55px;height:55px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--clr-primary),var(--clr-secondary));display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;"><i class="fa-solid fa-building"></i></div>
+                    <div><h4 style="font-size:.95rem;">New York City Trip</h4><p style="font-size:.8rem;color:var(--text-muted);">Oct 1 – Oct 8, 2024</p></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem;">
+                    <span class="badge badge-orange">Completed</span>
+                    <a href="itinerary-view.html" class="btn btn-ghost btn-sm">Review <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

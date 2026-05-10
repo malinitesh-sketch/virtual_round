@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveloop — Invoice & Billing</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+    <aside class="sidebar">
+        <div class="sidebar-logo"><h1><i class="fa-solid fa-paper-plane"></i> Traveloop</h1><span>Travel Beyond Gravity</span></div>
+        <nav class="sidebar-nav">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="trip-listing.html"><i class="fa-solid fa-suitcase"></i> My Trips</a>
+            <a href="create-trip.html"><i class="fa-solid fa-plus-circle"></i> Plan a Trip</a>
+            <a href="activity-search.html"><i class="fa-solid fa-compass"></i> Explore</a>
+            <a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="community.html"><i class="fa-solid fa-users"></i> Community</a>
+            <a href="packing-checklist.html"><i class="fa-solid fa-clipboard-check"></i> Packing</a>
+            <a href="trip-notes.html"><i class="fa-solid fa-book"></i> Notes</a>
+            <a href="invoice.html" class="active"><i class="fa-solid fa-file-invoice-dollar"></i> Invoice</a>
+            <a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a>
+        </nav>
+        <div class="sidebar-footer"><div class="avatar">JA</div><div class="user-info"><strong>James A.</strong><span>Traveler</span></div></div>
+    </aside>
+
+    <main class="main-content">
+        <div class="topbar">
+            <h2><i class="fa-solid fa-file-invoice-dollar"></i> Expense Invoice</h2>
+            <div class="topbar-actions">
+                <a href="trip-listing.html" class="btn btn-ghost btn-sm"><i class="fa-solid fa-arrow-left"></i> Back to My Trips</a>
+                <div class="search-bar" style="max-width:280px;">
+                    <i class="fa-solid fa-magnifying-glass" style="color:var(--text-muted);"></i>
+                    <input type="text" placeholder="Search invoices..." id="invoice-search">
+                    <button type="button"><i class="fa-solid fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Invoice Header -->
+        <div class="glass-card" style="margin-bottom:2rem;" id="invoice-header-card">
+            <h3 style="margin-bottom:.5rem;">Trip to Europe Adventure</h3>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:1.5rem;">May 35 – Jan 05, 2025 · 4 cities · Created by James</p>
+
+            <div class="invoice-header">
+                <div>
+                    <span style="font-size:.8rem;color:var(--text-muted);display:block;">Invoice ID</span>
+                    <strong style="color:var(--neon-cyan);">INV-xyz-30290</strong>
+                    <br><br>
+                    <span style="font-size:.8rem;color:var(--text-muted);display:block;">Traveler Details</span>
+                    <p style="font-size:.9rem;">James · Arjun · Jerry · Cristina</p>
+                </div>
+                <div style="text-align:right;">
+                    <span style="font-size:.8rem;color:var(--text-muted);display:block;">Generated Date</span>
+                    <strong>May 20, 2025</strong>
+                    <br><br>
+                    <span style="font-size:.8rem;color:var(--text-muted);display:block;">Payment Status</span>
+                    <span class="badge badge-orange" style="font-size:.85rem;"><i class="fa-solid fa-clock"></i> Pending</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expense Table -->
+        <div class="glass-card" style="margin-bottom:2rem;overflow-x:auto;" id="invoice-table-card">
+            <table class="data-table" id="invoice-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Qty / Details</th>
+                        <th>Unit Cost</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><span class="badge badge-cyan">Hotel</span></td>
+                        <td>Hotel Booking — Paris</td>
+                        <td>3 nights</td>
+                        <td>$3,000</td>
+                        <td><strong>$9,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><span class="badge badge-violet">Travel</span></td>
+                        <td>Flight Bookings (DEL → PAR)</td>
+                        <td>1</td>
+                        <td>$12,000</td>
+                        <td><strong>$12,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><span class="badge badge-orange">Activity</span></td>
+                        <td>Eiffel Tower Tour</td>
+                        <td>4 persons</td>
+                        <td>$50</td>
+                        <td><strong>$200</strong></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><span class="badge badge-green">Food</span></td>
+                        <td>Dining — Paris restaurants</td>
+                        <td>3 days</td>
+                        <td>$150</td>
+                        <td><strong>$450</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Totals -->
+            <div class="invoice-total" id="invoice-totals">
+                <div style="display:flex;justify-content:flex-end;gap:3rem;margin-bottom:.5rem;">
+                    <span style="color:var(--text-muted);">Subtotal</span><strong>$21,650</strong>
+                </div>
+                <div style="display:flex;justify-content:flex-end;gap:3rem;margin-bottom:.5rem;">
+                    <span style="color:var(--text-muted);">Tax (5%)</span><strong>$1,082</strong>
+                </div>
+                <div style="display:flex;justify-content:flex-end;gap:3rem;margin-bottom:.5rem;">
+                    <span style="color:var(--text-muted);">Discount</span><strong style="color:#22c55e;">-$732</strong>
+                </div>
+                <div style="display:flex;justify-content:flex-end;gap:3rem;padding-top:.8rem;border-top:2px solid var(--neon-cyan);">
+                    <span style="font-size:1.1rem;">Grand Total</span><span class="grand">$22,000</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;" id="invoice-actions">
+            <button class="btn btn-primary" id="inv-download"><i class="fa-solid fa-download"></i> Download Invoice</button>
+            <button class="btn btn-cta" id="inv-export"><i class="fa-solid fa-file-pdf"></i> Export as PDF</button>
+            <button class="btn btn-outline" id="inv-mark-paid" style="color:#22c55e;border-color:#22c55e;"><i class="fa-solid fa-check-circle"></i> Mark as Paid</button>
+        </div>
+
+        <!-- Budget Insights -->
+        <div class="glass-card" id="invoice-budget-insights">
+            <h3 style="margin-bottom:1rem;font-size:1rem;"><i class="fa-solid fa-chart-pie" style="color:var(--neon-violet);"></i> Budget Insights</h3>
+            <div class="grid-3">
+                <div>
+                    <span style="font-size:.8rem;color:var(--text-muted);display:block;">Total Budget</span>
+                    <strong style="font-size:1.3rem;">$20,000</strong>
+                </div>
+                <div>
+                    <span style="font-size:.8rem;color:var(--text-muted);display:block;">Total Spent</span>
+                    <strong style="font-size:1.3rem;color:var(--clr-cta);">$22,000</strong>
+                </div>
+                <div>
+                    <span style="font-size:.8rem;color:var(--text-muted);display:block;">Remaining</span>
+                    <strong style="font-size:1.3rem;color:#ef4444;">-$2,000</strong>
+                </div>
+            </div>
+            <div style="margin-top:1rem;">
+                <a href="itinerary-view.html" class="btn btn-outline btn-sm"><i class="fa-solid fa-chart-bar"></i> View Full Budget</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
