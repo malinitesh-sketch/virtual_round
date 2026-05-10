@@ -30,8 +30,11 @@
 
     <main class="main-content">
         <div class="topbar">
-            <h2><i class="fa-solid fa-map-location-dot"></i> Itinerary — Europe Adventure</h2>
-            <a href="trip-listing.html" class="btn btn-ghost btn-sm"><i class="fa-solid fa-arrow-left"></i> Back to Trips</a>
+            <h2 id="itin-page-title"><i class="fa-solid fa-map-location-dot"></i> Itinerary</h2>
+            <div style="display:flex;gap:1rem;">
+                <button id="wa-share-btn" class="btn" style="background:#25D366;color:#fff;border:none;border-radius:8px;padding:0.5rem 1rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:0.5rem;"><i class="fa-brands fa-whatsapp" style="font-size:1.2rem;"></i> Share on WhatsApp</button>
+                <a href="trip-listing.html" class="btn btn-ghost btn-sm"><i class="fa-solid fa-arrow-left"></i> Back to Trips</a>
+            </div>
         </div>
 
         <div style="display:grid;grid-template-columns:1fr 360px;gap:2rem;">

@@ -556,6 +556,28 @@
     }
   }
 
+  // ===== PAGE: ITINERARY (WhatsApp Share) =====
+  function initItinerary() {
+    const waBtn = document.getElementById('wa-share-btn');
+    if (!waBtn) return;
+
+    waBtn.addEventListener('click', () => {
+      // Get trip details from the page
+      const title = document.getElementById('itin-page-title')?.innerText || 'My Awesome Trip';
+      
+      const message = `Hey! Check out my upcoming trip planned on Traveloop:
+*${title.replace('Itinerary', '').replace('—', '-').trim()}*
+
+View the full itinerary and details here:
+${window.location.href}
+
+Planned via Traveloop ✈️`;
+
+      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+    });
+  }
+
   // ===== INITIALIZATION =====
   document.addEventListener('DOMContentLoaded', () => {
     // Auth pages
@@ -577,6 +599,7 @@
     initPackingChecklist();
     initTripNotes();
     initAdmin();
+    initItinerary();
 
     // Backend connection test
     testBackendConnection();
