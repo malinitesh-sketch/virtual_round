@@ -19,28 +19,33 @@ def home():
 def register():
 
     try:
+        # Get JSON data
         data = request.get_json()
 
         print("Received Data:", data)
 
-        if not data:
+        # Check if data exists
+        if data is None:
             return jsonify({
                 "success": False,
-                "message": "No data received"
+                "message": "No JSON data received"
             }), 400
 
         username = data.get("username")
         password = data.get("password")
 
+        # Validation
         if not username or not password:
             return jsonify({
                 "success": False,
                 "message": "Username and password required"
             }), 400
 
+        # Success response
         return jsonify({
             "success": True,
-            "message": "Registration successful"
+            "message": "Registration successful",
+            "username": username
         }), 200
 
     except Exception as e:
