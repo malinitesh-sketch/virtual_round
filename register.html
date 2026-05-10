@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Traveloop</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <!-- Main container with split-screen layout -->
+    <div class="register-container">
+        
+        <!-- Left Section: Travel Image Placeholder -->
+        <div class="image-section">
+            <div class="image-placeholder">
+                <div class="placeholder-content">
+                    <h2>Join Our Community</h2>
+                    <p>Discover amazing destinations worldwide</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Section: Registration Form -->
+        <div class="form-section">
+            <div class="form-card">
+                <!-- Logo/Brand Name -->
+                <div class="brand">
+                    <h1>Traveloop</h1>
+                    <p class="tagline">Your travel companion</p>
+                </div>
+
+                <!-- Welcome Message -->
+                <h2 class="form-title">Create Account</h2>
+                <p class="form-subtitle">Start exploring the world today</p>
+
+                <!-- Registration Form -->
+                <form class="register-form">
+                    
+                    <!-- Row 1: First Name and Last Name -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input 
+                                type="text" 
+                                id="firstName" 
+                                name="firstName" 
+                                placeholder="John" 
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input 
+                                type="text" 
+                                id="lastName" 
+                                name="lastName" 
+                                placeholder="Doe" 
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Email Input -->
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="you@example.com" 
+                            required
+                        >
+                    </div>
+
+                    <!-- Phone Number Input -->
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            name="phone" 
+                            placeholder="+1 (555) 123-4567" 
+                            required
+                        >
+                    </div>
+
+                    <!-- Row 2: City and Country -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input 
+                                type="text" 
+                                id="city" 
+                                name="city" 
+                                placeholder="New York" 
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input 
+                                type="text" 
+                                id="country" 
+                                name="country" 
+                                placeholder="United States" 
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Sign Up Button (Call-to-Action) -->
+                    <button type="submit" class="btn-register">Register</button>
+                </form>
+
+                <!-- Login Link -->
+                <div class="login-section">
+                    <p>Already have an account? 
+                        <a href="login.html" class="link-login">Log In</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
