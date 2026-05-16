@@ -21,6 +21,17 @@ docker compose up -d --build
 - Backend health: http://localhost:5000/api/health
 - MySQL: 3306 (root password: from compose)
 
+4. After making changes to the website source, rebuild and restart the stack so the original site is immediately available:
+
+```powershell
+cd <project-root>
+docker compose up -d --build
+```
+
+Then open:
+- Original website: http://localhost
+- Backend API: http://localhost:5000/api/health
+
 Notes:
 - The compose file mounts `backend/db-setup.sql` into MySQL's `/docker-entrypoint-initdb.d/` so the schema runs on the first start. If you want to run migrations repeatedly, use `backend/init-db.js` against the running MySQL instance.
 - For production, replace passwords and `JWT_SECRET` with secure secrets and consider using a managed database and a real TLS-terminating proxy.
