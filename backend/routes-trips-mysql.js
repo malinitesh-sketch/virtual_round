@@ -9,26 +9,38 @@ async function listTrips(req, res){
     // If no auth, return latest trips (prototype friendly)
     if(!userId){
       const [rows] = await pool.execute(
-        'SELECT id, title, start_date, end_date, description, cover_url FROM trips ORDER BY id DESC LIMIT 10'
+        'SELECT id, title, destination, start_date, end_date, description, status, budget, spent, cities, cover_url FROM trips ORDER BY id DESC LIMIT 10'
       );
       return res.json({ trips: rows.map(r => ({
         id: r.id,
         title: r.title,
-        destination: null,
+        destination: r.destination,
+        description: r.description,
+        status: r.status,
+        budget: r.budget,
+        spent: r.spent,
+        cities: r.cities,
+        coverUrl: r.cover_url,
         startDate: r.start_date,
         endDate: r.end_date
       })) });
     }
 
     const [rows] = await pool.execute(
-      'SELECT id, title, start_date, end_date, description, cover_url FROM trips WHERE user_id = ? ORDER BY id DESC',
+      'SELECT id, title, destination, start_date, end_date, description, status, budget, spent, cities, cover_url FROM trips WHERE user_id = ? ORDER BY id DESC',
       [userId]
     );
 
     return res.json({ trips: rows.map(r => ({
       id: r.id,
       title: r.title,
-      destination: null,
+      destination: r.destination,
+      description: r.description,
+      status: r.status,
+      budget: r.budget,
+      spent: r.spent,
+      cities: r.cities,
+      coverUrl: r.cover_url,
       startDate: r.start_date,
       endDate: r.end_date
     })) });
@@ -39,7 +51,7 @@ async function listTrips(req, res){
 
 async function createTrip(req, res){
   try{
-    const { title, startDate, endDate, description } = req.body || {};
+    const { title, destination, startDate, endDate, description, budget, cities, status } = req.body || {};
     const userId = req.user?.id;
 
     if(!userId){
@@ -50,8 +62,8 @@ async function createTrip(req, res){
     }
 
     const [result] = await pool.execute(
-      'INSERT INTO trips (user_id, title, start_date, end_date, description, cover_url) VALUES (?, ?, ?, ?, ?, ?)',
-      [userId, String(title).trim(), startDate, endDate, description || null, null]
+      'INSERT INTO trips (user_id, title, destination, start_date, end_date, description, status, budget, spent, cities, cover_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [userId, String(title).trim(), destination || null, startDate, endDate, description || null, status || 'upcoming', budget || 0, 0, cities || 1, null]
     );
 
     return res.status(201).json({ message:'Trip created', tripId: result.insertId });

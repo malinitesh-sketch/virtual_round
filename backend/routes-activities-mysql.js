@@ -5,19 +5,18 @@ const pool = createPool();
 async function listActivities(req, res){
   try{
     const tripId = req.query.tripId;
+    let query = `SELECT id, stop_id, trip_id, day_index, name, type, start_time, end_time, cost, notes
+       FROM activities`;
+    const params = [];
 
-    if(!tripId){
-      return res.status(400).json({ error: 'tripId query param required' });
+    if (tripId) {
+      query += ' WHERE trip_id = ?';
+      params.push(tripId);
     }
 
-    const [rows] = await pool.execute(
-      `SELECT id, stop_id, trip_id, day_index, name, type, start_time, end_time, cost, notes
-       FROM activities
-       WHERE trip_id = ?
-       ORDER BY day_index, start_time`,
-      [tripId]
-    );
+    query += ' ORDER BY day_index, start_time';
 
+    const [rows] = await pool.execute(query, params);
     return res.json({ activities: rows });
   }catch(err){
     return res.status(500).json({ error:'Failed to list activities', details:String(err?.message||err) });

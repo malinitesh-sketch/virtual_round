@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0%" stop-color="#00f0ff"/>
+      <stop offset="100%" stop-color="#a393eb"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#0a0e1a" />
+  <g transform="translate(80,80)">
+    <rect x="0" y="0" width="640" height="440" rx="18" fill="url(#g)" opacity="0.12" />
+    <g transform="translate(40,30)">
+      <circle cx="120" cy="120" r="80" fill="#fff" opacity="0.06" />
+      <path d="M40 320 L560 320 L520 200 L160 200 Z" fill="#fff" opacity="0.04" />
+      <g fill="#fff" opacity="0.85">
+        <text x="220" y="140" font-family="Inter, sans-serif" font-size="34">Explore</text>
+        <text x="220" y="190" font-family="Inter, sans-serif" font-size="20" opacity="0.9">Plan, share, and book your trips</text>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -7,18 +7,18 @@
   --bg-card: rgba(15, 20, 40, 0.7);
   --bg-glass: rgba(255,255,255,0.05);
   --border-glow: rgba(0,240,255,0.25);
-  --neon-cyan: #00f0ff;
+  --neon-cyan: #06b6d4;
   --neon-violet: #a393eb;
   --neon-purple: #7c3aed;
   --clr-primary: #27296d;
   --clr-secondary: #5e63b6;
   --clr-accent: #a393eb;
   --clr-light: #f0e4d7;
-  --clr-cta: #f97316;
+  --clr-cta: #ff7a59; /* coral accent */
   --text-primary: #e8eaed;
   --text-muted: #8892a4;
-  --radius: 16px;
-  --radius-sm: 10px;
+  --radius: 18px; /* comfortable spacing */
+  --radius-sm: 12px;
   --shadow-glow: 0 0 20px rgba(0,240,255,0.15);
   --transition: all 0.3s ease;
   --sidebar-w: 260px;
@@ -458,7 +458,7 @@ body::before {
   width:100%; max-width:440px;
   background:var(--bg-card); backdrop-filter:blur(20px);
   border:1px solid var(--border-glow);
-  border-radius:24px; padding:2.5rem;
+  border-radius:24px; padding:2.8rem; /* slightly more comfortable */
   animation:fadeInUp .6s ease;
 }
 .auth-card h2 {
@@ -477,6 +477,28 @@ body::before {
   display:flex; align-items:center; justify-content:center;
   font-size:2.5rem; font-weight:700; color:var(--bg-dark);
   box-shadow:0 0 30px rgba(0,240,255,0.2);
+}
+
+/* logo image */
+.site-logo { height:28px; vertical-align:middle; margin-right:10px; }
+.auth-card h2 { display:flex; align-items:center; gap:10px; }
+
+/* form input comfortable padding */
+.form-control { padding:13px 18px; }
+
+/* Auth grid for desktop: illustration + form */
+.auth-grid { display:grid; grid-template-columns:1fr; gap:0; align-items:stretch; }
+.auth-illustration { display:none; }
+.auth-illustration img { width:100%; height:100%; object-fit:cover; display:block; border-radius:24px 0 0 24px; }
+.auth-form { padding:2.2rem; }
+
+@media(min-width:900px) {
+  .auth-card { max-width:920px; padding:0; grid-template-columns:1fr 1fr; }
+  .auth-grid { grid-template-columns:45% 55%; }
+  .auth-illustration { display:block; }
+  .auth-form { padding:2.5rem 2.8rem; }
+  .auth-card h2 { text-align:left; padding-top:12px; }
+  .auth-card .subtitle { text-align:left; }
 }
 
 /* ===== INVOICE ===== */

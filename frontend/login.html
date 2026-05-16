@@ -42,50 +42,54 @@
     <!-- ===== LOGIN PAGE ===== -->
     <div class="auth-page">
         <div class="auth-card float-slow glow-pulse">
-            <div class="auth-banner">
-                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Travel destination scene" />
-            </div>
-            <!-- Logo -->
-            <h2><i class="fa-solid fa-paper-plane"></i> Traveloop</h2>
-            <p class="subtitle">Your journey begins here</p>
-
-            <!-- Status Messages -->
-            <div id="login-error" data-login-error style="color:#ef4444;font-size:.85rem;text-align:center;margin-bottom:1rem;display:none;"></div>
-            <div id="login-success" data-login-success style="color:#22c55e;font-size:.85rem;text-align:center;margin-bottom:1rem;display:none;"></div>
-
-            <!-- Login Form -->
-            <form id="login-form" autocomplete="on">
-                <div class="form-group">
-                    <label for="login-email"><i class="fa-solid fa-envelope"></i> Email</label>
-                    <input type="email" id="login-email" data-login-email class="form-control" placeholder="Enter your email" required>
+            <div class="auth-grid">
+                <div class="auth-illustration">
+                    <img src="images/login-illustration.svg" alt="Login illustration" />
                 </div>
-                <div class="form-group">
-                    <label for="login-password"><i class="fa-solid fa-lock"></i> Password</label>
-                    <input type="password" id="login-password" data-login-password class="form-control" placeholder="Enter your password" required>
-                </div>
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;">
-                    <label style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--text-muted);cursor:pointer;">
-                        <input type="checkbox" id="login-remember" style="accent-color:var(--neon-cyan);"> Remember me
-                    </label>
-                    <a href="#" style="font-size:.82rem;">Forgot Password?</a>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" id="login-btn" data-login-submit>
-                    <i class="fa-solid fa-right-to-bracket"></i> Login
-                </button>
-            </form>
+                <div class="auth-form">
+                      <!-- Logo -->
+                      <h2><img src="images/logo.svg" alt="Traveloop" class="site-logo">Traveloop</h2>
+                    <p class="subtitle">Your journey begins here</p>
 
-            <!-- Demo credentials hint -->
-            <div style="text-align:center;margin-top:1rem;padding:.8rem;border-radius:var(--radius-sm);background:rgba(0,240,255,0.05);border:1px solid rgba(0,240,255,0.15);">
-                <p style="font-size:.75rem;color:var(--text-muted);"><i class="fa-solid fa-info-circle" style="color:var(--neon-cyan);"></i> Demo: <strong>james@example.com</strong> / <strong>password123</strong></p>
-            </div>
+                    <!-- Status Messages -->
+                    <div id="login-error" data-login-error style="color:#ef4444;font-size:.85rem;text-align:center;margin-bottom:1rem;display:none;"></div>
+                    <div id="login-success" data-login-success style="color:#22c55e;font-size:.85rem;text-align:center;margin-bottom:1rem;display:none;"></div>
 
-            <!-- Toggle to Register -->
-            <div class="auth-cta-button">
-                <a href="register.html" id="login-to-register" style="color:inherit; width:100%; display:inline-flex; justify-content:center;">Create a new account</a>
+                    <!-- Login Form -->
+                    <form id="login-form" autocomplete="on">
+                        <div class="form-group">
+                            <label for="login-email"><i class="fa-solid fa-envelope"></i> Email</label>
+                            <input type="email" id="login-email" data-login-email class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password"><i class="fa-solid fa-lock"></i> Password</label>
+                            <input type="password" id="login-password" data-login-password class="form-control" placeholder="Enter your password" required>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;">
+                            <label style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--text-muted);cursor:pointer;">
+                                <input type="checkbox" id="login-remember" style="accent-color:var(--neon-cyan);"> Remember me
+                            </label>
+                            <a href="#" style="font-size:.82rem;">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" id="login-btn" data-login-submit>
+                            <i class="fa-solid fa-right-to-bracket"></i> Login
+                        </button>
+                    </form>
+
+                    <!-- Demo credentials hint -->
+                    <div style="text-align:center;margin-top:1rem;padding:.8rem;border-radius:var(--radius-sm);background:rgba(0,240,255,0.05);border:1px solid rgba(0,240,255,0.15);">
+                        <p style="font-size:.75rem;color:var(--text-muted);"><i class="fa-solid fa-info-circle" style="color:var(--neon-cyan);"></i> Demo: <strong>james@example.com</strong> / <strong>password123</strong></p>
+                    </div>
+
+                    <!-- Toggle to Register -->
+                    <div class="auth-cta-button">
+                        <a href="register.html" id="login-to-register" style="color:inherit; width:100%; display:inline-flex; justify-content:center;">Create a new account</a>
+                    </div>
+                    <p class="auth-footer" style="margin-top:14px; font-size:.92rem; color:var(--text-muted); text-align:center;">
+                        Already have an account? Use the form above to login and access your travel planner.
+                    </p>
+                </div>
             </div>
-            <p class="auth-footer" style="margin-top:14px; font-size:.92rem; color:var(--text-muted); text-align:center;">
-                Already have an account? Use the form above to login and access your travel planner.
-            </p>
         </div>
     </div>
 

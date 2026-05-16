@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="40" viewBox="0 0 160 40">
+  <defs>
+    <linearGradient id="lg" x1="0" x2="1">
+      <stop offset="0%" stop-color="#ff7a59"/>
+      <stop offset="100%" stop-color="#a393eb"/>
+    </linearGradient>
+  </defs>
+  <rect width="160" height="40" rx="8" fill="none" />
+  <g transform="translate(6,6)">
+    <circle cx="14" cy="14" r="12" fill="url(#lg)" />
+    <path d="M34 6 L54 6 L46 20 L54 34 L34 34 L38 20 Z" fill="#fff" opacity="0.9"/>
+    <text x="70" y="20" font-family="Inter, sans-serif" font-size="16" fill="#fff" font-weight="600">Traveloop</text>
+  </g>
+</svg>
