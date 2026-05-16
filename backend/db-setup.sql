@@ -1,7 +1,8 @@
--- Traveloop MySQL schema (raw SQL)
--- Use: create database travelloop; then run this file.
+﻿-- Traveloop MySQL schema (production-ready)
+-- Use: run this file against the traveloop database.
 
-USE travelloop;
+CREATE DATABASE IF NOT EXISTS traveloop CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE traveloop;
 
 CREATE TABLE IF NOT EXISTS users (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -9,6 +10,10 @@ CREATE TABLE IF NOT EXISTS users (
   email VARCHAR(190) NOT NULL UNIQUE,
   password_hash VARCHAR(255) NOT NULL,
   role ENUM('Traveler','Admin') NOT NULL DEFAULT 'Traveler',
+  profile_pic VARCHAR(500),
+  phone VARCHAR(50),
+  city VARCHAR(100),
+  country VARCHAR(100),
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -17,8 +22,13 @@ CREATE TABLE IF NOT EXISTS trips (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user_id BIGINT UNSIGNED NOT NULL,
   title VARCHAR(160) NOT NULL,
+  destination VARCHAR(255),
   start_date DATE NOT NULL,
   end_date DATE NOT NULL,
+  status VARCHAR(40) NOT NULL DEFAULT 'upcoming',
+  budget DECIMAL(10,2) NOT NULL DEFAULT 0,
+  spent DECIMAL(10,2) NOT NULL DEFAULT 0,
+  cities INT NOT NULL DEFAULT 1,
   description TEXT,
   cover_url VARCHAR(500),
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -26,22 +36,19 @@ CREATE TABLE IF NOT EXISTS trips (
   CONSTRAINT fk_trips_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS stops (
+CREATE TABLE IF NOT EXISTS itineraries (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   trip_id BIGINT UNSIGNED NOT NULL,
-  city VARCHAR(120) NOT NULL,
-  country VARCHAR(120),
-  start_date DATE,
-  end_date DATE,
-  sort_order INT NOT NULL DEFAULT 0,
+  sections TEXT,
+  days TEXT,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT fk_stops_trip FOREIGN KEY (trip_id) REFERENCES trips(id) ON DELETE CASCADE
+  CONSTRAINT fk_itineraries_trip FOREIGN KEY (trip_id) REFERENCES trips(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS activities (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  stop_id BIGINT UNSIGNED NULL,
   trip_id BIGINT UNSIGNED NOT NULL,
+  stop_id BIGINT UNSIGNED NULL,
   day_index INT NOT NULL DEFAULT 1,
   name VARCHAR(160) NOT NULL,
   type VARCHAR(80),
@@ -50,26 +57,65 @@ CREATE TABLE IF NOT EXISTS activities (
   cost DECIMAL(10,2) NOT NULL DEFAULT 0,
   notes TEXT,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT fk_activities_trip FOREIGN KEY (trip_id) REFERENCES trips(id) ON DELETE CASCADE,
-  CONSTRAINT fk_activities_stop FOREIGN KEY (stop_id) REFERENCES stops(id) ON DELETE SET NULL
+  CONSTRAINT fk_activities_trip FOREIGN KEY (trip_id) REFERENCES trips(id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS bookings (
+CREATE TABLE IF NOT EXISTS community_posts (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id BIGINT UNSIGNED NOT NULL,
+  author VARCHAR(150) NOT NULL,
+  type VARCHAR(80) NOT NULL DEFAULT 'Post',
+  content TEXT NOT NULL,
+  likes INT NOT NULL DEFAULT 0,
+  comments INT NOT NULL DEFAULT 0,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_community_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS notes (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   trip_id BIGINT UNSIGNED NOT NULL,
-  user_id BIGINT UNSIGNED NOT NULL,
-  flights_price DECIMAL(10,2) NOT NULL DEFAULT 0,
-  hotel_price DECIMAL(10,2) NOT NULL DEFAULT 0,
-  activities_price DECIMAL(10,2) NOT NULL DEFAULT 0,
-  total_price DECIMAL(10,2) NOT NULL DEFAULT 0,
-  status ENUM('Pending','Confirmed') NOT NULL DEFAULT 'Pending',
+  title VARCHAR(220) NOT NULL,
+  content TEXT,
+  day INT NOT NULL DEFAULT 1,
+  date DATE,
+  category VARCHAR(120),
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  CONSTRAINT fk_bookings_trip FOREIGN KEY (trip_id) REFERENCES trips(id) ON DELETE CASCADE,
-  CONSTRAINT fk_bookings_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+  CONSTRAINT fk_notes_trip FOREIGN KEY (trip_id) REFERENCES trips(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS invoices (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  trip_id BIGINT UNSIGNED NOT NULL,
+  trip_title VARCHAR(220) NOT NULL,
+  travelers TEXT,
+  generated_date DATE,
+  status VARCHAR(80) NOT NULL DEFAULT 'pending',
+  items TEXT,
+  subtotal DECIMAL(10,2) NOT NULL DEFAULT 0,
+  tax DECIMAL(10,2) NOT NULL DEFAULT 0,
+  discount DECIMAL(10,2) NOT NULL DEFAULT 0,
+  grand_total DECIMAL(10,2) NOT NULL DEFAULT 0,
+  budget_total DECIMAL(10,2) NOT NULL DEFAULT 0,
+  budget_spent DECIMAL(10,2) NOT NULL DEFAULT 0,
+  budget_remaining DECIMAL(10,2) NOT NULL DEFAULT 0,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_invoices_trip FOREIGN KEY (trip_id) REFERENCES trips(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS checklists (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  trip_id BIGINT UNSIGNED NOT NULL,
+  trip_name VARCHAR(220) NOT NULL,
+  categories TEXT,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_checklists_trip FOREIGN KEY (trip_id) REFERENCES trips(id) ON DELETE CASCADE
 );
 
 CREATE INDEX idx_trips_user_id ON trips(user_id);
-CREATE INDEX idx_stops_trip_id ON stops(trip_id);
+CREATE INDEX idx_itineraries_trip_id ON itineraries(trip_id);
 CREATE INDEX idx_activities_trip_id ON activities(trip_id);
-
+CREATE INDEX idx_community_user_id ON community_posts(user_id);
+CREATE INDEX idx_notes_trip_id ON notes(trip_id);
+CREATE INDEX idx_invoices_trip_id ON invoices(trip_id);
+CREATE INDEX idx_checklists_trip_id ON checklists(trip_id);

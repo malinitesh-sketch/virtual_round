@@ -158,8 +158,20 @@
 
       try {
         const data = await registerUser(payload);
-        showMsg(successBox, 'Registration successful! Redirecting...', 'success');
-        setTimeout(() => { window.location.href = 'index.html'; }, 800);
+        showMsg(successBox, 'Registration successful! Logging you in...', 'success');
+
+        // Ensure user is logged in: registerUser should set token, but attempt login if needed
+        const tokenExists = !!localStorage.getItem('authToken');
+        if (!tokenExists) {
+          try {
+            await loginUser(email, password);
+          } catch (e) {
+            // continue to redirect even if explicit login fails (server may have returned token already)
+            console.warn('Auto-login failed after registration:', e.message);
+          }
+        }
+
+        setTimeout(() => { window.location.href = 'index.html'; }, 700);
       } catch (err) {
         showMsg(errorBox, err.message, 'error');
       }

@@ -14,7 +14,7 @@ const API_BASE_URL = (isFileProtocol || (isLocalDevHost && !isBackendPort))
 const TOKEN_KEY = 'authToken';
 const USER_KEY = 'traveloop_user';
 const USERS_KEY = 'traveloop_users';
-const OFFLINE_MODE = true;
+const OFFLINE_MODE = false;
 
 function getUsersStore() {
   try {

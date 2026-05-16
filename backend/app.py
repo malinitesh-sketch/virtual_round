@@ -8,6 +8,7 @@ from flask import Flask, request, jsonify, send_from_directory, redirect
 from flask_cors import CORS
 import json
 import os
+import sqlite3
 import uuid
 from datetime import datetime
 
@@ -18,217 +19,158 @@ app = Flask(__name__, static_folder=FRONTEND_DIR, static_url_path='')
 CORS(app)  # Enable CORS for frontend connection
 
 # ===== DATABASE SETUP =====
-DB_PATH = os.path.join(os.path.dirname(__file__), 'db.json')
+DB_PATH = os.path.join(os.path.dirname(__file__), 'db.sqlite')
+JSON_DB_PATH = os.path.join(os.path.dirname(__file__), 'db.json')
+SQL_JSON_FIELDS = {'sections', 'days', 'categories', 'travelers', 'items', 'popularCities', 'popularActivities', 'monthlyTrends'}
 
 def load_db():
-    """Load the JSON database file."""
-    if not os.path.exists(DB_PATH):
-        init_db()
-    with open(DB_PATH, 'r', encoding='utf-8') as f:
+    if not os.path.exists(JSON_DB_PATH):
+        return {
+            'users': [],
+            'trips': [],
+            'itineraries': [],
+            'activities': [],
+            'checklists': [],
+            'community': [],
+            'notes': [],
+            'invoices': [],
+            'admin': {}
+        }
+    with open(JSON_DB_PATH, 'r', encoding='utf-8') as f:
         return json.load(f)
 
 def save_db(data):
-    """Save data to the JSON database file."""
-    with open(DB_PATH, 'w', encoding='utf-8') as f:
+    with open(JSON_DB_PATH, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
+def get_db_conn():
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def row_to_dict(row):
+    if row is None:
+        return None
+
+    result = dict(row)
+    for key in SQL_JSON_FIELDS:
+        if key in result and result[key] is not None:
+            try:
+                result[key] = json.loads(result[key])
+            except (ValueError, TypeError):
+                pass
+    return result
+
+def fetch_all(query, params=()):
+    conn = get_db_conn()
+    cursor = conn.execute(query, params)
+    rows = [row_to_dict(r) for r in cursor.fetchall()]
+    conn.close()
+    return rows
+
+def fetch_one(query, params=()):
+    conn = get_db_conn()
+    cursor = conn.execute(query, params)
+    row = row_to_dict(cursor.fetchone())
+    conn.close()
+    return row
+
+def execute_sql(query, params=()):
+    conn = get_db_conn()
+    cursor = conn.cursor()
+    cursor.execute(query, params)
+    conn.commit()
+    lastrowid = cursor.lastrowid
+    conn.close()
+    return lastrowid
+
+def is_table_empty(conn, table_name):
+    cursor = conn.execute(f"SELECT COUNT(*) AS count FROM {table_name}")
+    row = cursor.fetchone()
+    return row['count'] == 0
+
 def init_db():
-    """Initialize database with seed data."""
-    seed_data = {
-        "users": [
-            {
-                "id": "user-001",
-                "email": "james@example.com",
-                "password": "password123",
-                "name": "James Anderson",
-                "firstName": "James",
-                "lastName": "Anderson",
-                "phone": "+1 234 567 890",
-                "city": "New York",
-                "country": "United States",
-                "photo": "",
-                "createdAt": "2024-01-15T10:00:00Z"
-            },
-            {
-                "id": "user-002",
-                "email": "sarah@example.com",
-                "password": "password123",
-                "name": "Sarah Adams",
-                "firstName": "Sarah",
-                "lastName": "Adams",
-                "phone": "+1 987 654 321",
-                "city": "London",
-                "country": "United Kingdom",
-                "photo": "",
-                "createdAt": "2024-02-20T14:30:00Z"
-            },
-            {
-                "id": "user-003",
-                "email": "mike@example.com",
-                "password": "password123",
-                "name": "Mike Kumar",
-                "firstName": "Mike",
-                "lastName": "Kumar",
-                "phone": "+91 98765 43210",
-                "city": "Mumbai",
-                "country": "India",
-                "photo": "",
-                "createdAt": "2024-03-10T09:15:00Z"
-            }
-        ],
-        "trips": [
-            {
-                "id": "trip-001",
-                "userId": "user-001",
-                "title": "Europe Adventure 2025",
-                "destination": "Paris, Rome, Swiss Alps",
-                "startDate": "2025-06-10",
-                "endDate": "2025-06-20",
-                "status": "ongoing",
-                "budget": 13500,
-                "spent": 9800,
-                "cities": 4,
-                "createdAt": "2025-05-01T10:00:00Z"
-            },
-            {
-                "id": "trip-002",
-                "userId": "user-001",
-                "title": "Tokyo Exploration",
-                "destination": "Tokyo, Kyoto",
-                "startDate": "2025-07-15",
-                "endDate": "2025-07-25",
-                "status": "upcoming",
-                "budget": 8000,
-                "spent": 0,
-                "cities": 2,
-                "createdAt": "2025-04-20T10:00:00Z"
-            },
-            {
-                "id": "trip-003",
-                "userId": "user-001",
-                "title": "Bali Adventure",
-                "destination": "Bali",
-                "startDate": "2024-12-10",
-                "endDate": "2024-12-20",
-                "status": "completed",
-                "budget": 5000,
-                "spent": 4800,
-                "cities": 3,
-                "createdAt": "2024-11-01T10:00:00Z"
-            }
-        ],
-        "itineraries": [
-            {
-                "id": "itin-001",
-                "tripId": "trip-001",
-                "sections": [
-                    {"name": "Paris — City Exploration", "dateRange": "Jun 10 – Jun 13", "budget": 4500, "info": "Explore iconic landmarks, enjoy French cuisine, and visit world-renowned museums."},
-                    {"name": "Rome — Historical Tour", "dateRange": "Jun 14 – Jun 17", "budget": 3800, "info": "Visit the Colosseum, Vatican City, and the Trevi Fountain."},
-                    {"name": "Swiss Alps — Adventure", "dateRange": "Jun 18 – Jun 20", "budget": 5200, "info": "Hiking, skiing, and breathtaking mountain views."}
-                ],
-                "days": [
-                    {"day": 1, "title": "Arrival in Paris", "description": "Arrive at CDG Airport, transfer to hotel, evening walk along Seine River"},
-                    {"day": 2, "title": "Paris Exploration", "description": "Visit Eiffel Tower, Louvre Museum, Champs-Élysées, French dinner"},
-                    {"day": 3, "title": "Travel to Rome", "description": "Morning flight to Rome, check-in at hotel, evening Colosseum visit"},
-                    {"day": 4, "title": "Rome Discovery", "description": "Vatican City, Trevi Fountain, Spanish Steps, authentic Italian pizza"}
+    conn = get_db_conn()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS users (
+        id TEXT PRIMARY KEY,
+        email TEXT NOT NULL UNIQUE,
+        password TEXT NOT NULL,
+        name TEXT NOT NULL,
+        first_name TEXT,
+        last_name TEXT,
+        phone TEXT,
+        city TEXT,
+        country TEXT,
+        photo TEXT,
+        created_at TEXT NOT NULL
+    )
+    """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS trips (
+        id TEXT PRIMARY KEY,
+        user_id TEXT,
+        title TEXT,
+        destination TEXT,
+        start_date TEXT,
+        end_date TEXT,
+        status TEXT,
+        budget REAL,
+        spent REAL,
+        cities INTEGER,
+        created_at TEXT,
+        FOREIGN KEY(user_id) REFERENCES users(id)
+    )
+    """)
+
+    conn.commit()
+
+    if os.path.exists(JSON_DB_PATH) and is_table_empty(conn, 'users'):
+        with open(JSON_DB_PATH, 'r', encoding='utf-8') as f:
+            seed_data = json.load(f)
+
+        for user in seed_data.get('users', []):
+            cursor.execute(
+                "INSERT OR IGNORE INTO users (id, email, password, name, first_name, last_name, phone, city, country, photo, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                [
+                    user.get('id'),
+                    user.get('email', '').strip().lower(),
+                    user.get('password', ''),
+                    user.get('name', ''),
+                    user.get('firstName', ''),
+                    user.get('lastName', ''),
+                    user.get('phone', ''),
+                    user.get('city', ''),
+                    user.get('country', ''),
+                    user.get('photo', ''),
+                    user.get('createdAt') or datetime.now().isoformat()
                 ]
-            }
-        ],
-        "activities": [
-            {"id": "act-001", "name": "Paragliding — Interlaken", "type": "Adventure", "price": 180, "location": "Swiss Alps", "rating": 4.8},
-            {"id": "act-002", "name": "Scuba Diving — Maldives", "type": "Water Sport", "price": 250, "location": "Maldives", "rating": 4.9},
-            {"id": "act-003", "name": "Art Tour — Florence", "type": "Cultural", "price": 95, "location": "Florence", "rating": 4.7},
-            {"id": "act-004", "name": "Hiking — Machu Picchu", "type": "Nature", "price": 320, "location": "Peru", "rating": 4.9},
-            {"id": "act-005", "name": "Food Tour — Tokyo", "type": "Culinary", "price": 75, "location": "Tokyo", "rating": 4.6},
-            {"id": "act-006", "name": "Sailing — Santorini", "type": "Water Sport", "price": 200, "location": "Santorini", "rating": 4.8}
-        ],
-        "checklists": [
-            {
-                "id": "check-001",
-                "tripId": "trip-001",
-                "tripName": "Paris & Rome Adventure",
-                "categories": [
-                    {"name": "Documents", "items": [
-                        {"name": "Passport", "packed": True},
-                        {"name": "Flight Tickets (printed)", "packed": True},
-                        {"name": "Travel Insurance", "packed": True},
-                        {"name": "Hotel Booking Confirmation", "packed": False}
-                    ]},
-                    {"name": "Clothing", "items": [
-                        {"name": "Casual Shirts", "packed": True},
-                        {"name": "Trousers / Jeans", "packed": False},
-                        {"name": "Comfortable Walking Shoes", "packed": False},
-                        {"name": "Light Jacket / Windbreaker", "packed": False}
-                    ]},
-                    {"name": "Electronics", "items": [
-                        {"name": "Phone Charger", "packed": True},
-                        {"name": "Universal Power Adapter", "packed": False},
-                        {"name": "Earphones / Headphones", "packed": False}
-                    ]}
+            )
+
+        for trip in seed_data.get('trips', []):
+            cursor.execute(
+                "INSERT OR IGNORE INTO trips (id, user_id, title, destination, start_date, end_date, status, budget, spent, cities, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                [
+                    trip.get('id'),
+                    trip.get('userId'),
+                    trip.get('title', ''),
+                    trip.get('destination', ''),
+                    trip.get('startDate', ''),
+                    trip.get('endDate', ''),
+                    trip.get('status', 'upcoming'),
+                    trip.get('budget', 0),
+                    trip.get('spent', 0),
+                    trip.get('cities', 1),
+                    trip.get('createdAt') or datetime.now().isoformat()
                 ]
-            }
-        ],
-        "community": [
-            {"id": "post-001", "userId": "user-002", "author": "Sarah Adams", "type": "Travel Tip", "content": "Just got back from Bali! Pro tip: Visit Tegallalang Rice Terraces early morning.", "likes": 42, "comments": 8, "createdAt": "2025-06-10T08:00:00Z"},
-            {"id": "post-002", "userId": "user-003", "author": "Mike Kumar", "type": "Review", "content": "Tokyo food tour was incredible! Tsukiji Outer Market is a must-visit.", "likes": 89, "comments": 15, "createdAt": "2025-06-10T05:00:00Z"},
-            {"id": "post-003", "userId": "user-002", "author": "Laura Peterson", "type": "Question", "content": "Planning a 2-week Europe trip! Has anyone done Paris → Rome → Swiss Alps?", "likes": 23, "comments": 31, "createdAt": "2025-06-09T12:00:00Z"}
-        ],
-        "notes": [
-            {"id": "note-001", "tripId": "trip-001", "title": "Hotel check-in details — Paris", "content": "Check in after 2 PM, Room 415, breakfast included (7–10 AM).", "day": 1, "date": "2025-06-10", "category": "Hotel"},
-            {"id": "note-002", "tripId": "trip-001", "title": "Best photo spots — Eiffel Tower", "content": "Trocadéro Gardens has the best view. Go early morning for fewer crowds.", "day": 2, "date": "2025-06-11", "category": "Sightseeing"},
-            {"id": "note-003", "tripId": "trip-001", "title": "Hotel check-in details — Rome", "content": "Check in after 2 PM, Room 302, breakfast included (7–10 AM).", "day": 3, "date": "2025-06-14", "category": "Hotel"}
-        ],
-        "invoices": [
-            {
-                "id": "INV-xyz-30290",
-                "tripId": "trip-001",
-                "tripTitle": "Trip to Europe Adventure",
-                "travelers": ["James", "Arjun", "Jerry", "Cristina"],
-                "generatedDate": "2025-05-20",
-                "status": "pending",
-                "items": [
-                    {"category": "Hotel", "description": "Hotel Booking — Paris", "qty": "3 nights", "unitCost": 3000, "amount": 9000},
-                    {"category": "Travel", "description": "Flight Bookings (DEL → PAR)", "qty": "1", "unitCost": 12000, "amount": 12000},
-                    {"category": "Activity", "description": "Eiffel Tower Tour", "qty": "4 persons", "unitCost": 50, "amount": 200},
-                    {"category": "Food", "description": "Dining — Paris restaurants", "qty": "3 days", "unitCost": 150, "amount": 450}
-                ],
-                "subtotal": 21650,
-                "tax": 1082,
-                "discount": 732,
-                "grandTotal": 22000,
-                "budgetTotal": 20000,
-                "budgetSpent": 22000,
-                "budgetRemaining": -2000
-            }
-        ],
-        "admin": {
-            "totalUsers": 1247,
-            "totalTrips": 3891,
-            "citiesCovered": 156,
-            "revenue": 2400000,
-            "popularCities": [
-                {"name": "Paris", "percentage": 92},
-                {"name": "Tokyo", "percentage": 85},
-                {"name": "Rome", "percentage": 78},
-                {"name": "Bali", "percentage": 71}
-            ],
-            "popularActivities": [
-                {"name": "Hiking", "percentage": 88},
-                {"name": "Scuba Diving", "percentage": 75},
-                {"name": "Food Tours", "percentage": 82},
-                {"name": "Paragliding", "percentage": 60}
-            ],
-            "monthlyTrends": [
-                {"month": "Jan", "value": 40},
-                {"month": "Feb", "value": 55},
-                {"month": "Mar", "value": 50},
-                {"month": "Apr", "value": 70},
-                {"month": "May", "value": 85},
-                {"month": "Jun", "value": 95}
-            ]
-        }
-    }
-    save_db(seed_data)
+            )
+
+        conn.commit()
+
+    conn.close()
 
 
 # ===== ROOT / HEALTH CHECK =====
@@ -251,76 +193,95 @@ def test():
 # ===== AUTH ENDPOINTS =====
 @app.route('/api/auth/register', methods=['POST'])
 def register():
-    data = request.get_json()
-    db = load_db()
-    
-    # Check if email already exists
-    for user in db['users']:
-        if user['email'] == data.get('email'):
-            return jsonify({"error": "Email already registered"}), 400
-    
-    new_user = {
-        "id": f"user-{uuid.uuid4().hex[:6]}",
-        "email": data.get('email', ''),
-        "password": data.get('password', ''),
-        "name": f"{data.get('firstName', '')} {data.get('lastName', '')}".strip() or data.get('name', ''),
-        "firstName": data.get('firstName', ''),
-        "lastName": data.get('lastName', ''),
-        "phone": data.get('phone', ''),
-        "city": data.get('city', ''),
-        "country": data.get('country', ''),
-        "photo": data.get('profilePic', ''),
-        "createdAt": datetime.now().isoformat()
-    }
-    
-    db['users'].append(new_user)
-    save_db(db)
-    
+    data = request.get_json() or {}
+    email = str(data.get('email', '')).strip().lower()
+    password = str(data.get('password', ''))
+    first_name = str(data.get('firstName', '')).strip()
+    last_name = str(data.get('lastName', '')).strip()
+    name = str(data.get('name', '')).strip() or f"{first_name} {last_name}".strip()
+    phone = str(data.get('phone', '')).strip()
+    city = str(data.get('city', '')).strip()
+    country = str(data.get('country', '')).strip()
+    photo = data.get('profilePic', '') or ''
+
+    if not email or not password:
+        return jsonify({"error": "Email and password are required"}), 400
+
+    existing_user = fetch_one("SELECT id FROM users WHERE email = ?", (email,))
+    if existing_user:
+        return jsonify({"error": "Email already registered"}), 400
+
+    new_user_id = f"user-{uuid.uuid4().hex[:6]}"
+    created_at = datetime.now().isoformat()
+
+    execute_sql(
+        "INSERT INTO users (id, email, password, name, first_name, last_name, phone, city, country, photo, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [new_user_id, email, password, name, first_name, last_name, phone, city, country, photo, created_at]
+    )
+
     token = f"tok-{uuid.uuid4().hex}"
-    return jsonify({"message": "Registration successful", "token": token, "user": {k: v for k, v in new_user.items() if k != 'password'}}), 201
+    user = {
+        "id": new_user_id,
+        "email": email,
+        "name": name,
+        "firstName": first_name,
+        "lastName": last_name,
+        "phone": phone,
+        "city": city,
+        "country": country,
+        "photo": photo,
+        "createdAt": created_at
+    }
+
+    return jsonify({"message": "Registration successful", "token": token, "user": user}), 201
 
 @app.route('/api/auth/login', methods=['POST'])
 def login():
-    data = request.get_json()
-    db = load_db()
-    
-    email = data.get('email', '')
-    password = data.get('password', '')
-    
-    for user in db['users']:
-        if user['email'] == email and user['password'] == password:
-            token = f"tok-{uuid.uuid4().hex}"
-            return jsonify({
-                "message": "Login successful",
-                "token": token,
-                "user": {k: v for k, v in user.items() if k != 'password'}
-            })
-    
-    return jsonify({"error": "Invalid email or password"}), 401
+    data = request.get_json() or {}
+    email = str(data.get('email', '')).strip().lower()
+    password = str(data.get('password', ''))
+
+    if not email or not password:
+        return jsonify({"error": "Email and password are required"}), 400
+
+    user = fetch_one("SELECT * FROM users WHERE email = ? AND password = ? LIMIT 1", (email, password))
+    if not user:
+        return jsonify({"error": "Invalid email or password"}), 401
+
+    user.pop('password', None)
+    token = f"tok-{uuid.uuid4().hex}"
+
+    return jsonify({
+        "message": "Login successful",
+        "token": token,
+        "user": user
+    })
 
 
 # ===== TRIPS ENDPOINTS =====
 @app.route('/api/trips', methods=['GET'])
 def get_trips():
-    db = load_db()
-    return jsonify(db['trips'])
+    trips = fetch_all("SELECT * FROM trips ORDER BY created_at DESC")
+    return jsonify(trips)
 
 @app.route('/api/trips/<trip_id>', methods=['GET'])
 def get_trip(trip_id):
-    db = load_db()
-    trip = next((t for t in db['trips'] if t['id'] == trip_id), None)
+    trip = fetch_one("SELECT * FROM trips WHERE id = ?", (trip_id,))
     if not trip:
         return jsonify({"error": "Trip not found"}), 404
     return jsonify(trip)
 
 @app.route('/api/trips', methods=['POST'])
 def create_trip():
-    data = request.get_json()
-    db = load_db()
-    
+    data = request.get_json() or {}
+    user_id = data.get('userId')
+    if not user_id:
+        first_user = fetch_one("SELECT id FROM users ORDER BY created_at LIMIT 1")
+        user_id = first_user.get('id') if first_user else 'user-001'
+
     new_trip = {
         "id": f"trip-{uuid.uuid4().hex[:6]}",
-        "userId": data.get('userId', 'user-001'),
+        "userId": user_id,
         "title": data.get('title', ''),
         "destination": data.get('destination', ''),
         "startDate": data.get('startDate', ''),
@@ -331,29 +292,60 @@ def create_trip():
         "cities": data.get('cities', 1),
         "createdAt": datetime.now().isoformat()
     }
-    
-    db['trips'].append(new_trip)
-    save_db(db)
+
+    execute_sql(
+        "INSERT INTO trips (id, user_id, title, destination, start_date, end_date, status, budget, spent, cities, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [
+            new_trip['id'],
+            new_trip['userId'],
+            new_trip['title'],
+            new_trip['destination'],
+            new_trip['startDate'],
+            new_trip['endDate'],
+            new_trip['status'],
+            new_trip['budget'],
+            new_trip['spent'],
+            new_trip['cities'],
+            new_trip['createdAt']
+        ]
+    )
+
     return jsonify(new_trip), 201
 
 @app.route('/api/trips/<trip_id>', methods=['PUT'])
 def update_trip(trip_id):
-    data = request.get_json()
-    db = load_db()
-    
-    for i, trip in enumerate(db['trips']):
-        if trip['id'] == trip_id:
-            db['trips'][i].update(data)
-            save_db(db)
-            return jsonify(db['trips'][i])
-    
-    return jsonify({"error": "Trip not found"}), 404
+    data = request.get_json() or {}
+    trip = fetch_one("SELECT * FROM trips WHERE id = ?", (trip_id,))
+    if not trip:
+        return jsonify({"error": "Trip not found"}), 404
+
+    field_map = {
+        'title': 'title',
+        'destination': 'destination',
+        'startDate': 'start_date',
+        'endDate': 'end_date',
+        'status': 'status',
+        'budget': 'budget',
+        'spent': 'spent',
+        'cities': 'cities'
+    }
+    updates = []
+    values = []
+    for key, column in field_map.items():
+        if key in data:
+            updates.append(f"{column} = ?")
+            values.append(data[key])
+
+    if updates:
+        values.append(trip_id)
+        execute_sql(f"UPDATE trips SET {', '.join(updates)} WHERE id = ?", tuple(values))
+
+    updated_trip = fetch_one("SELECT * FROM trips WHERE id = ?", (trip_id,))
+    return jsonify(updated_trip)
 
 @app.route('/api/trips/<trip_id>', methods=['DELETE'])
 def delete_trip(trip_id):
-    db = load_db()
-    db['trips'] = [t for t in db['trips'] if t['id'] != trip_id]
-    save_db(db)
+    execute_sql("DELETE FROM trips WHERE id = ?", (trip_id,))
     return jsonify({"message": "Trip deleted"})
 
 
@@ -503,33 +495,61 @@ def mark_paid(invoice_id):
 # ===== USER PROFILE ENDPOINTS =====
 @app.route('/api/user/profile', methods=['GET'])
 def get_profile():
-    db = load_db()
     user_id = request.args.get('userId')
-    
     user = None
     if user_id:
-        user = next((u for u in db['users'] if u['id'] == user_id), None)
-    
-    if not user and db['users']:
-        user = db['users'][0]
-        
+        user = fetch_one("SELECT * FROM users WHERE id = ?", (user_id,))
+    else:
+        user = fetch_one("SELECT * FROM users ORDER BY created_at LIMIT 1")
+
     if not user:
         return jsonify({"error": "No user found"}), 404
-    return jsonify({k: v for k, v in user.items() if k != 'password'})
+
+    user.pop('password', None)
+    return jsonify(user)
 
 @app.route('/api/user/profile', methods=['PUT'])
 def update_profile():
-    data = request.get_json()
-    db = load_db()
+    data = request.get_json() or {}
     user_id = request.args.get('userId')
-    
-    for i, u in enumerate(db['users']):
-        if (user_id and u['id'] == user_id) or (not user_id and i == 0):
-            db['users'][i].update({k: v for k, v in data.items() if k != 'password' and k != 'id'})
-            save_db(db)
-            return jsonify({k: v for k, v in db['users'][i].items() if k != 'password'})
-            
-    return jsonify({"error": "User not found"}), 404
+
+    if not user_id:
+        first_user = fetch_one("SELECT id FROM users ORDER BY created_at LIMIT 1")
+        user_id = first_user.get('id') if first_user else None
+
+    if not user_id:
+        return jsonify({"error": "User not found"}), 404
+
+    field_map = {
+        'name': 'name',
+        'firstName': 'first_name',
+        'lastName': 'last_name',
+        'phone': 'phone',
+        'city': 'city',
+        'country': 'country',
+        'photo': 'photo',
+        'email': 'email'
+    }
+
+    updates = []
+    values = []
+    for key, column in field_map.items():
+        if key in data:
+            updates.append(f"{column} = ?")
+            values.append(data[key])
+
+    if not updates:
+        return jsonify({"error": "No valid profile fields provided"}), 400
+
+    values.append(user_id)
+    execute_sql(f"UPDATE users SET {', '.join(updates)} WHERE id = ?", tuple(values))
+
+    user = fetch_one("SELECT * FROM users WHERE id = ?", (user_id,))
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    user.pop('password', None)
+    return jsonify(user)
 
 
 # ===== ADMIN ENDPOINTS =====
